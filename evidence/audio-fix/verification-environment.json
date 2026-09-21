@@ -1,0 +1,6 @@
+{
+  "at": "2026-09-21T19:46:20.098451+00:00",
+  "uptime": "19:46:20 up 21 days,  1:17,  3 users,  load average: 12.05, 10.94, 9.34",
+  "memory": "               total        used        free      shared  buff/cache   available\nMem:           3.8Gi       2.5Gi       290Mi        15Mi       1.3Gi       1.3Gi\nSwap:          4.0Gi       2.3Gi       1.7Gi\n",
+  "note": "Two-vCPU shared server; software rendering. These timings are not hardware-device benchmarks."
+}

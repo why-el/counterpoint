@@ -1,0 +1,211 @@
+{
+  "target": "https://why-el.github.io/counterpoint/",
+  "name": "live-after",
+  "errors": [],
+  "release": {
+    "name": "Counterpoint",
+    "version": "1.0.1",
+    "revision": "dba9519a10151a5ad5b14699fca2ab5241d00d5d",
+    "builtAt": "2026-09-21T19:40:07.966Z"
+  },
+  "enabled": {
+    "time": 20,
+    "playing": false,
+    "scrubbing": false,
+    "sound": true,
+    "audioState": "running",
+    "score": {
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "variation": 0,
+      "seed": 37
+    },
+    "revisions": [
+      {
+        "at": -1000000000000,
+        "config": {
+          "mask": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "variation": 0,
+          "seed": 37
+        }
+      }
+    ],
+    "camera": [
+      0.675,
+      0.9500000000000001,
+      13.5
+    ],
+    "quality": "low",
+    "hidden": false
+  },
+  "played": {
+    "time": 44.029750566893426,
+    "playing": true,
+    "scrubbing": false,
+    "sound": true,
+    "audioState": "running",
+    "score": {
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "variation": 0,
+      "seed": 37
+    },
+    "revisions": [
+      {
+        "at": -1000000000000,
+        "config": {
+          "mask": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "variation": 0,
+          "seed": 37
+        }
+      }
+    ],
+    "camera": [
+      0.675,
+      0.9500000000000001,
+      13.5
+    ],
+    "quality": "low",
+    "hidden": false
+  },
+  "scheduled": [
+    {
+      "id": "7:0",
+      "time": 21,
+      "generation": 2
+    },
+    {
+      "id": "0:1",
+      "time": 24,
+      "generation": 2
+    },
+    {
+      "id": "1:1",
+      "time": 28.5,
+      "generation": 2
+    },
+    {
+      "id": "2:1",
+      "time": 30,
+      "generation": 2
+    },
+    {
+      "id": "4:1",
+      "time": 37.5,
+      "generation": 2
+    },
+    {
+      "id": "5:1",
+      "time": 39,
+      "generation": 2
+    },
+    {
+      "id": "6:1",
+      "time": 43.5,
+      "generation": 2
+    },
+    {
+      "id": "0:2",
+      "time": 48,
+      "generation": 2
+    },
+    {
+      "id": "1:2",
+      "time": 52.5,
+      "generation": 2
+    },
+    {
+      "id": "2:2",
+      "time": 54,
+      "generation": 2
+    },
+    {
+      "id": "3:2",
+      "time": 58.5,
+      "generation": 2
+    },
+    {
+      "id": "4:2",
+      "time": 61.5,
+      "generation": 2
+    },
+    {
+      "id": "5:2",
+      "time": 63,
+      "generation": 2
+    },
+    {
+      "id": "6:2",
+      "time": 67.5,
+      "generation": 2
+    }
+  ],
+  "output": {
+    "peak": 0.18099524080753326,
+    "rms": 0.018355333713264935,
+    "duration": 24.06,
+    "sampleRate": 44100,
+    "secondPeaks": [
+      2.034569958809697e-34,
+      0.12814606726169586,
+      0.007385506294667721,
+      0.00034745316952466965,
+      0.16993768513202667,
+      0.0027268552221357822,
+      0.00004068037014803849,
+      2.034569958809697e-34,
+      0.12960578501224518,
+      0.03379383683204651,
+      0.18099524080753326,
+      0.0027413107454776764,
+      0.000040922488551586866,
+      2.034569958809697e-34,
+      2.034569958809697e-34,
+      2.034569958809697e-34,
+      2.034569958809697e-34,
+      0.1277409791946411,
+      0.03387079015374184,
+      0.17071929574012756,
+      0.002720070770010352,
+      0.00004095828262506984,
+      2.0345717955196202e-34,
+      0.12269435077905655,
+      0.011394253931939602
+    ],
+    "mime": "audio/webm;codecs=opus"
+  }
+}

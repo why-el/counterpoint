@@ -1,0 +1,13 @@
+{
+  "source": "dba9519a10151a5ad5b14699fca2ab5241d00d5d",
+  "pagesCommit": "3f2b8d72227746a54c3b11eba8acdd9e3e865dc3",
+  "archive": "/home/wael/music/.clean-check/audio-release/counterpoint-1.0.1-static.tar.gz",
+  "sha256": "a5a7c5c4b92a2d3023a652fdfbe1d5a5f8048b7f1aafba01772739e386b6a449",
+  "build": {
+    "name": "Counterpoint",
+    "version": "1.0.1",
+    "revision": "dba9519a10151a5ad5b14699fca2ab5241d00d5d",
+    "builtAt": "2026-09-21T19:40:07.966Z"
+  },
+  "rootDistMatches": true
+}

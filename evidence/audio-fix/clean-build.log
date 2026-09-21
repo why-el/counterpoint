@@ -1,0 +1,112 @@
+
+added 39 packages, and audited 40 packages in 10s
+
+11 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+> counterpoint@1.0.1 test
+> tsx --test tests/*.test.ts
+
+TAP version 13
+# Subtest: transport rebases clocks without jumping, pauses and seeks negative time
+ok 1 - transport rebases clocks without jumping, pauses and seeks negative time
+  ---
+  duration_ms: 6.979505
+  type: 'test'
+  ...
+# Subtest: positive modular arithmetic handles negative and loop times
+ok 2 - positive modular arithmetic handles negative and loop times
+  ---
+  duration_ms: 0.551674
+  type: 'test'
+  ...
+# Subtest: each trajectory is continuous at every route boundary, including negative time
+ok 3 - each trajectory is continuous at every route boundary, including negative time
+  ---
+  duration_ms: 139.982733
+  type: 'test'
+  ...
+# Subtest: trajectory sampling is deterministic and independent of order
+ok 4 - trajectory sampling is deterministic and independent of order
+  ---
+  duration_ms: 33.558424
+  type: 'test'
+  ...
+# Subtest: score scheduling partitions correctly without boundary duplicates
+ok 5 - score scheduling partitions correctly without boundary duplicates
+  ---
+  duration_ms: 18.716363
+  type: 'test'
+  ...
+# Subtest: score edits preserve every in-flight event
+ok 6 - score edits preserve every in-flight event
+  ---
+  duration_ms: 0.76032
+  type: 'test'
+  ...
+# Subtest: event lookup rejects unbounded requests
+ok 7 - event lookup rejects unbounded requests
+  ---
+  duration_ms: 0.459931
+  type: 'test'
+  ...
+# Subtest: shared state roundtrips with seed, mask and camera and bounds camera
+ok 8 - shared state roundtrips with seed, mask and camera and bounds camera
+  ---
+  duration_ms: 5.81413
+  type: 'test'
+  ...
+# Subtest: malformed and oversized shared state fails closed
+ok 9 - malformed and oversized shared state fails closed
+  ---
+  duration_ms: 5.352051
+  type: 'test'
+  ...
+# Subtest: each marble clears every neighboring rail on the full descent
+ok 10 - each marble clears every neighboring rail on the full descent
+  ---
+  duration_ms: 291.481082
+  type: 'test'
+  ...
+# Subtest: lift pockets stay synchronized to the shared wheel at negative and positive times
+ok 11 - lift pockets stay synchronized to the shared wheel at negative and positive times
+  ---
+  duration_ms: 2.782952
+  type: 'test'
+  ...
+# Subtest: every enabled note appears within two turns at the expected arrangement density
+ok 12 - every enabled note appears within two turns at the expected arrangement density
+  ---
+  duration_ms: 0.896243
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1912.070183
+
+> counterpoint@1.0.1 build
+> tsc --noEmit && vite build && node scripts/release.mjs
+
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 19 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   5.10 kB │ gzip:   1.99 kB
+dist/assets/index-BPql04Jn.css    9.60 kB │ gzip:   2.96 kB
+dist/assets/index-CqP1GbVv.js   614.15 kB │ gzip: 156.45 kB │ map: 2,986.41 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 2.16s

@@ -1,0 +1,21 @@
+2026-09-21T19:46:05.334Z open
+2026-09-21T19:46:50.901Z metadata and initial state
+2026-09-21T19:46:55.478Z transport and notes
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+48 !== 0
+
+    at file:///home/wael/music/scripts/live-smoke.mjs:12:106 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 48,
+  expected: 0,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v22.19.0

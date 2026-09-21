@@ -1,0 +1,8 @@
+{
+  "pass": false,
+  "startedAt": "2026-09-21T19:46:04.945Z",
+  "failedAt": "2026-09-21T19:46:55.581Z",
+  "stage": "transport and notes",
+  "lifecycle": [],
+  "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n48 !== 0\n"
+}

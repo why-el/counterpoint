@@ -33,7 +33,7 @@ npx playwright install chromium firefox webkit
 npm run test:browser
 ```
 
-Operating-system browser libraries may also be required. `COUNTERPOINT_URL=https://…/counterpoint/ npm run test:browser` runs the application tests against a published build. The audio fixture tests run only against the local development server. They record the output after the compressor, check a 2.5-second main-thread stall, and verify cancellation of queued notes.
+Operating-system browser libraries may also be required. `COUNTERPOINT_URL=https://why-el.github.io/counterpoint/ npm run test:browser` runs the application tests against a published build. The audio fixture tests run only against the local development server. They record the output after the compressor, check a 2.5-second main-thread stall, and verify cancellation of queued notes.
 
 To record audio from the running application:
 
@@ -65,7 +65,7 @@ Shared URLs include the selected arrangement, validated seed, and bounded camera
 
 `release.json` records the source revision, package version, and build time. Build after committing the source to avoid a self-referential revision. Release archives retain the published files; rebuilding the same source changes the build timestamp.
 
-The [v1.0.0 archive](https://github.com/why-el/counterpoint/releases/tag/v1.0.0) retains the first published build, source `c7c18ac`. Version 1.0.1 raises output gain by about 5 dB, protects scheduled notes from rendering stalls, and revises interface and documentation text. See [STATUS.md](STATUS.md) for deployment status and [REVIEW_LOG.md](REVIEW_LOG.md) for tests, defects, corrections, and coverage limits.
+The [v1.0.0 archive](https://github.com/why-el/counterpoint/releases/tag/v1.0.0) retains the first published build, source `c7c18ac`. Version 1.0.1 raises output gain by about 5 dB, protects scheduled notes from rendering stalls, and revises interface and documentation text. The [v1.0.1 release](https://github.com/why-el/counterpoint/releases/tag/v1.0.1) retains the updated build. See [STATUS.md](STATUS.md) for deployment details and [REVIEW_LOG.md](REVIEW_LOG.md) for tests, defects, corrections, and coverage limits.
 
 On this server, Firefox 3D tests require a virtual display:
 

@@ -1,0 +1,62 @@
+{
+  "at": "2026-09-21T19:42:02.150298+00:00",
+  "base": "https://wael.khobalatte.com/counterpoint/",
+  "release": {
+    "name": "Counterpoint",
+    "version": "1.0.1",
+    "revision": "dba9519a10151a5ad5b14699fca2ab5241d00d5d",
+    "builtAt": "2026-09-21T19:40:07.966Z"
+  },
+  "files": {
+    "THIRD_PARTY.txt": {
+      "status": 200,
+      "sha256": "72175ddcb1a445bad42faf1340e7f5e9393c98d55f1055b60249b394658a8798",
+      "bytes": 386
+    },
+    "THREE-LICENSE.txt": {
+      "status": 200,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
+      "bytes": 1081
+    },
+    "assets/index-BPql04Jn.css": {
+      "status": 200,
+      "sha256": "355b341f67520ed4cea1c8a48291df28bbc57902fb73f7959be1b59aeb6fefc7",
+      "bytes": 9603
+    },
+    "assets/index-CqP1GbVv.js": {
+      "status": 200,
+      "sha256": "292e78e420556aa091a4954b8ccaac2652beba44bde4a8aa00a190ff34c260db",
+      "bytes": 614155
+    },
+    "assets/index-CqP1GbVv.js.map": {
+      "status": 200,
+      "sha256": "f8155ecb8c0779ec1e110a79c72b39239423362370fdfa897f614ed3efda5b65",
+      "bytes": 2986418
+    },
+    "counterpoint.webm": {
+      "status": 200,
+      "sha256": "a5b8e063a470096878ef7282ad7f2f17f4d5e01131d69f68c468d8cb1a750d27",
+      "bytes": 2530098
+    },
+    "favicon.svg": {
+      "status": 200,
+      "sha256": "596d6f216eff58f2b3b7db42533aa5a779e1ad9fccf660d9c9fd9081622ffc20",
+      "bytes": 312
+    },
+    "index.html": {
+      "status": 200,
+      "sha256": "7c7630d38eba9b1b91e90a8ff64fd06b393f61792aa16dca1455679486579441",
+      "bytes": 5106
+    },
+    "release.json": {
+      "status": 200,
+      "sha256": "06ad29c5f839c39af2fa9b0c302878bcd9457b838dd9997308690bb70fe32a3c",
+      "bytes": 150
+    },
+    "still.jpg": {
+      "status": 200,
+      "sha256": "032b2997a36b995827db608e6eaa8c6fefa5f9d466502c3330f41bee5041014f",
+      "bytes": 138325
+    }
+  }
+}

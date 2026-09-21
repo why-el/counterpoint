@@ -1,0 +1,21 @@
+{
+  "release": {
+    "name": "Counterpoint",
+    "version": "1.0.1",
+    "revision": "dba9519a10151a5ad5b14699fca2ab5241d00d5d",
+    "builtAt": "2026-09-21T19:40:07.966Z"
+  },
+  "files": {
+    "THIRD_PARTY.txt": "72175ddcb1a445bad42faf1340e7f5e9393c98d55f1055b60249b394658a8798",
+    "THREE-LICENSE.txt": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
+    "assets/index-BPql04Jn.css": "355b341f67520ed4cea1c8a48291df28bbc57902fb73f7959be1b59aeb6fefc7",
+    "assets/index-CqP1GbVv.js": "292e78e420556aa091a4954b8ccaac2652beba44bde4a8aa00a190ff34c260db",
+    "assets/index-CqP1GbVv.js.map": "f8155ecb8c0779ec1e110a79c72b39239423362370fdfa897f614ed3efda5b65",
+    "counterpoint.webm": "a5b8e063a470096878ef7282ad7f2f17f4d5e01131d69f68c468d8cb1a750d27",
+    "favicon.svg": "596d6f216eff58f2b3b7db42533aa5a779e1ad9fccf660d9c9fd9081622ffc20",
+    "index.html": "7c7630d38eba9b1b91e90a8ff64fd06b393f61792aa16dca1455679486579441",
+    "release.json": "06ad29c5f839c39af2fa9b0c302878bcd9457b838dd9997308690bb70fe32a3c",
+    "still.jpg": "032b2997a36b995827db608e6eaa8c6fefa5f9d466502c3330f41bee5041014f"
+  },
+  "siteBaseline": "dc46db70937bebf7dae15e127879a162c773de41"
+}
