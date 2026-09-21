@@ -18,8 +18,8 @@ export class Score {
   const c=this.at(eventTime-13.5);if(!c.mask[note])return false;
   const turn=Math.floor((eventTime-OFFSETS[note])/CYCLE);
   if(c.variation===0)return !([3,7].includes(note)&&mod(turn+c.seed,2)===0);
-  if(c.variation===1)return !(note===0&&mod(turn,2)===1);
-  return [0,2,5,6].includes(note)||(mod(turn+c.seed,3)===0&&[1,7].includes(note));
+  if(c.variation===1)return [1,3,5,7].includes(note)||mod(turn+c.seed+Math.floor(note/2),2)===0;
+  return mod(turn+c.seed,2)===([0,2,5,6].includes(note)?0:1);
  }
  events(from:number,to:number):Strike[]{
   if(!Number.isFinite(from)||!Number.isFinite(to)||to<=from||to-from>1000)return [];
