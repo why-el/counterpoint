@@ -1,5 +1,5 @@
 {
-  "sourceRevision": "7ef8248b6c6611f6d12bcc0531b7c03b0fbe39ad",
+  "sourceRevision": "c7c18ac8f56718f6cecf71421b5fe3c68a5f9582",
   "allMatch": true,
   "files": {
     "THIRD_PARTY.txt": {
@@ -17,15 +17,15 @@
       "bytes": 9603,
       "sha256": "355b341f67520ed4cea1c8a48291df28bbc57902fb73f7959be1b59aeb6fefc7"
     },
-    "assets/index-C-8hYKEF.js": {
+    "assets/index-DsMitTDm.js": {
       "status": 200,
-      "bytes": 614096,
-      "sha256": "611ea53874f21b93dd81c41eb67950d37852a45f2819aceab9c5c335a3337b12"
+      "bytes": 614117,
+      "sha256": "d7567b878b09762a94b46d231c8aec94c62da1ca91988a93417bb23b844c8d1b"
     },
-    "assets/index-C-8hYKEF.js.map": {
+    "assets/index-DsMitTDm.js.map": {
       "status": 200,
-      "bytes": 2985690,
-      "sha256": "b20f86fc19390914b711c34fc7c4767b1ec47feea4b4ab3c172a9eaa9445f7de"
+      "bytes": 2985784,
+      "sha256": "a57a98c2fda24c56018cdcac5d497d6f2595dc539ae7cae405e3de840658c4be"
     },
     "counterpoint.webm": {
       "status": 200,
@@ -40,12 +40,12 @@
     "index.html": {
       "status": 200,
       "bytes": 5204,
-      "sha256": "086586ad1173a13474aa2faab9d37278a9e6abbe35a30a14fcf1d61bf2e5f12c"
+      "sha256": "4bfacc8fc1f12bedbe96520138defb2c0e24c18f3d45fc625fcc29bac10b3a70"
     },
     "release.json": {
       "status": 200,
       "bytes": 150,
-      "sha256": "982ec0a4443be1c2d6a7466cd5d53017961c4fb187cee2f1212efa4a8f20bd2b"
+      "sha256": "2447c926583ca970e5e59250de3434a653f8deaedf123e6f95ceb9c7ea002f4b"
     },
     "still.jpg": {
       "status": 200,

@@ -13,73 +13,73 @@ TAP version 13
 # Subtest: transport rebases clocks without jumping, pauses and seeks negative time
 ok 1 - transport rebases clocks without jumping, pauses and seeks negative time
   ---
-  duration_ms: 2.15952
+  duration_ms: 1.598766
   type: 'test'
   ...
 # Subtest: positive modular arithmetic handles negative and loop times
 ok 2 - positive modular arithmetic handles negative and loop times
   ---
-  duration_ms: 0.482557
+  duration_ms: 0.27285
   type: 'test'
   ...
 # Subtest: each trajectory is continuous at every route boundary, including negative time
 ok 3 - each trajectory is continuous at every route boundary, including negative time
   ---
-  duration_ms: 19.584009
+  duration_ms: 19.271792
   type: 'test'
   ...
 # Subtest: trajectory sampling is deterministic and independent of order
 ok 4 - trajectory sampling is deterministic and independent of order
   ---
-  duration_ms: 7.780951
+  duration_ms: 7.59727
   type: 'test'
   ...
 # Subtest: score scheduling partitions correctly without boundary duplicates
 ok 5 - score scheduling partitions correctly without boundary duplicates
   ---
-  duration_ms: 3.825302
+  duration_ms: 3.374381
   type: 'test'
   ...
 # Subtest: score edits preserve every in-flight event
 ok 6 - score edits preserve every in-flight event
   ---
-  duration_ms: 1.634236
+  duration_ms: 0.383743
   type: 'test'
   ...
 # Subtest: event lookup rejects unbounded requests
 ok 7 - event lookup rejects unbounded requests
   ---
-  duration_ms: 0.399851
+  duration_ms: 0.262697
   type: 'test'
   ...
 # Subtest: shared state roundtrips with seed, mask and camera and bounds camera
 ok 8 - shared state roundtrips with seed, mask and camera and bounds camera
   ---
-  duration_ms: 0.593314
+  duration_ms: 0.598476
   type: 'test'
   ...
 # Subtest: malformed and oversized shared state fails closed
 ok 9 - malformed and oversized shared state fails closed
   ---
-  duration_ms: 2.660332
+  duration_ms: 0.503379
   type: 'test'
   ...
 # Subtest: each marble clears every neighboring rail on the full descent
 ok 10 - each marble clears every neighboring rail on the full descent
   ---
-  duration_ms: 114.481176
+  duration_ms: 121.32276
   type: 'test'
   ...
 # Subtest: lift pockets stay synchronized to the shared wheel at negative and positive times
 ok 11 - lift pockets stay synchronized to the shared wheel at negative and positive times
   ---
-  duration_ms: 1.477077
+  duration_ms: 2.106364
   type: 'test'
   ...
 # Subtest: every enabled voice participates in every variation within two turns, with distinct restrained densities
 ok 12 - every enabled voice participates in every variation within two turns, with distinct restrained densities
   ---
-  duration_ms: 0.589444
+  duration_ms: 0.595526
   type: 'test'
   ...
 1..12
@@ -90,7 +90,7 @@ ok 12 - every enabled voice participates in every variation within two turns, wi
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 646.714569
+# duration_ms 657.822876
 
 > counterpoint@1.0.0 build
 > tsc --noEmit && vite build && node scripts/release.mjs
@@ -100,13 +100,13 @@ transforming...
 ✓ 19 modules transformed.
 rendering chunks...
 computing gzip size...
-dist/index.html                   5.20 kB │ gzip:   2.11 kB
+dist/index.html                   5.20 kB │ gzip:   2.10 kB
 dist/assets/index-BPql04Jn.css    9.60 kB │ gzip:   2.96 kB
-dist/assets/index-C-8hYKEF.js   614.09 kB │ gzip: 156.44 kB │ map: 2,985.69 kB
+dist/assets/index-DsMitTDm.js   614.11 kB │ gzip: 156.44 kB │ map: 2,985.78 kB
 
 [plugin builtin:vite-reporter] 
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
-✓ built in 468ms
+✓ built in 508ms

@@ -44,6 +44,14 @@ All actors derive from one signed transport time. Enabling audio rebases that tr
 
 Edits latch on the next three-second grid boundary. A marble remembers the score at the beginning of its lift, 13.5 seconds before impact; launched marbles always complete their journey. Thus an outgoing voice may leave a final echo. The current session retains score revisions for scrubbing; an edit from a past instant replaces later edits. The visible time control spans a 48-second phrase, and the wheel can cross its boundaries. Shared URLs contain the desired arrangement, bounded seed, and bounded camera, not edit history, sound permission, or transport position.
 
+## Pinned release
+
+Published source: [`c7c18ac`](https://github.com/why-el/counterpoint/commit/c7c18ac8f56718f6cecf71421b5fe3c68a5f9582). The [v1.0.0 release](https://github.com/why-el/counterpoint/releases/tag/v1.0.0) retains the exact static archive. To reproduce the source build, check out `v1.0.0` before the commands above. Build timestamps differ when rebuilding; the retained archive is the published artifact.
+
+Two consecutive production browser checks passed on this source revision, with identical release metadata before and after each. The reports and desktop/mobile captures are in `evidence/live-1*` and `evidence/live-2*`. The initial paused-resize failure and its correction are retained in the review log.
+
+On this Linux server, the additional Firefox 3D check used `COUNTERPOINT_HEADED=1 COUNTERPOINT_NO_AUDIO=1 xvfb-run -a npx playwright test --project=firefox -g 'real controls'`. That mode explicitly verifies the unavailable-audio message; it does not claim Firefox audible output works in the server environment.
+
 ## Review and limitations
 
 See [REVIEW_LOG.md](REVIEW_LOG.md), [STATUS.md](STATUS.md), [DECISIONS.md](DECISIONS.md), and [COSTS.md](COSTS.md). Actual captures and machine-readable reports are in [evidence/](evidence/). Numerical audio analysis does not establish musical or timbral listening quality. Software-rendered browser runs are not phone or laptop performance results.

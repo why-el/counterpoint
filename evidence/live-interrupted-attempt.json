@@ -1,0 +1,7 @@
+{
+  "sourceRevision": "c7c18ac8f56718f6cecf71421b5fe3c68a5f9582",
+  "pass": false,
+  "scenario": "second production check, ordinary motion",
+  "error": "Target page, context or browser has been closed while clicking Notes",
+  "cause": "Unconfirmed browser-process closure; not counted as a pass. Additional process/lifecycle logging enabled for restart."
+}
