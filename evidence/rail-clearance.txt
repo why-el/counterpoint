@@ -1,0 +1,8 @@
+0 { min: 0.199, worst: 't=0.67 against 1', near: 0 }
+1 { min: 0.199, worst: 't=0.86 against 2', near: 0 }
+2 { min: 0.204, worst: 't=0.94 against 3', near: 0 }
+3 { min: 0.211, worst: 't=0.46 against 2', near: 0 }
+4 { min: 0.211, worst: 't=0.53 against 3', near: 0 }
+5 { min: 0.202, worst: 't=0.74 against 4', near: 0 }
+6 { min: 0.199, worst: 't=0.70 against 5', near: 0 }
+7 { min: 0.199, worst: 't=0.63 against 6', near: 0 }

@@ -1,0 +1,27 @@
+{
+  "errors": [],
+  "stats": {
+    "calls": 45,
+    "triangles": 114336,
+    "geometries": 25,
+    "textures": 5,
+    "quality": "low",
+    "renderer": "llvmpipe, or similar",
+    "frameSamples": 12,
+    "meanFrameMs": 216.13333333333333
+  },
+  "sharedState": {
+    "mask": [
+      false,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "variation": 1,
+    "seed": 37
+  }
+}

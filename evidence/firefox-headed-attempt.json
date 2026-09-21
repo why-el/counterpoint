@@ -1,0 +1,189 @@
+{
+  "config": {
+    "argv": [
+      "/usr/local/bin/node",
+      "/home/wael/music/node_modules/.bin/playwright",
+      "test",
+      "--project=firefox",
+      "-g",
+      "real controls"
+    ],
+    "configFile": "/home/wael/music/playwright.config.ts",
+    "rootDir": "/home/wael/music/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/wael/music/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/wael/music/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "browser.spec.ts"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/home/wael/music/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/home/wael/music/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "browser.spec.ts"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/home/wael/music/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/home/wael/music/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "browser.spec.ts"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "evidence/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "browser.spec.ts",
+      "file": "browser.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "real controls, deterministic reverse, sound, share, and camera",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "firefox",
+              "projectName": "firefox",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 70815,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#sound')\nExpected: \u001b[32m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nTimeout:  20000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('#sound') with timeout 20000ms\u001b[22m\n\u001b[2m  - waiting for locator('#sound')\u001b[22m\n\u001b[2m    42 × locator resolved to <button id=\"sound\" aria-pressed=\"false\" class=\"control sound\">…</button>\u001b[22m\n\u001b[2m       - unexpected value \"false\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#sound')\nExpected: \u001b[32m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nTimeout:  20000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('#sound') with timeout 20000ms\u001b[22m\n\u001b[2m  - waiting for locator('#sound')\u001b[22m\n\u001b[2m    42 × locator resolved to <button id=\"sound\" aria-pressed=\"false\" class=\"control sound\">…</button>\u001b[22m\n\u001b[2m       - unexpected value \"false\"\u001b[22m\n\n    at /home/wael/music/tests/browser.spec.ts:25:76",
+                    "location": {
+                      "file": "/home/wael/music/tests/browser.spec.ts",
+                      "column": 76,
+                      "line": 25
+                    },
+                    "snippet": "  23 |  await page.mouse.move(w.wheel.x,w.wheel.y);await page.mouse.down();await page.mouse.move(w.wheel.x-52,w.wheel.y-15,{steps:8});await page.mouse.up();expect(Math.abs((await api(page).state()).time-before)).toBeGreaterThan(.05);await page.evaluate(()=>(window as any).__counterpoint.pause());\n  24 |  await page.locator('#variation').click();expect((await api(page).state()).score.variation).toBe(1);\n> 25 |  await page.locator('#sound').click();await expect(page.locator('#sound')).toHaveAttribute('aria-pressed','true');expect((await api(page).state()).audioState).toBe('running');await page.locator('#play').click();await page.waitForTimeout(600);await page.locator('#play').click();\n     |                                                                            ^\n  26 |  await page.locator('#sound').click();expect((await api(page).state()).sound).toBe(false);\n  27 |  await page.locator('#about-open').click();await expect(page.locator('#about')).toBeVisible();await page.keyboard.press('Escape');await expect(page.locator('#about')).not.toBeVisible();\n  28 |  const shared=await page.evaluate(()=>(window as any).__counterpoint.share());expect(shared).toContain('#s=');await page.locator('#share').click();expect(await page.locator('#toast').textContent()||await page.locator('#share-dialog').isVisible()).toBeTruthy();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/wael/music/tests/browser.spec.ts",
+                        "column": 76,
+                        "line": 25
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveAttribute\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#sound')\nExpected: \u001b[32m\"\u001b[7mtru\u001b[27me\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mfals\u001b[27me\"\u001b[39m\nTimeout:  20000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveAttribute\" locator('#sound') with timeout 20000ms\u001b[22m\n\u001b[2m  - waiting for locator('#sound')\u001b[22m\n\u001b[2m    42 × locator resolved to <button id=\"sound\" aria-pressed=\"false\" class=\"control sound\">…</button>\u001b[22m\n\u001b[2m       - unexpected value \"false\"\u001b[22m\n\n\n  23 |  await page.mouse.move(w.wheel.x,w.wheel.y);await page.mouse.down();await page.mouse.move(w.wheel.x-52,w.wheel.y-15,{steps:8});await page.mouse.up();expect(Math.abs((await api(page).state()).time-before)).toBeGreaterThan(.05);await page.evaluate(()=>(window as any).__counterpoint.pause());\n  24 |  await page.locator('#variation').click();expect((await api(page).state()).score.variation).toBe(1);\n> 25 |  await page.locator('#sound').click();await expect(page.locator('#sound')).toHaveAttribute('aria-pressed','true');expect((await api(page).state()).audioState).toBe('running');await page.locator('#play').click();await page.waitForTimeout(600);await page.locator('#play').click();\n     |                                                                            ^\n  26 |  await page.locator('#sound').click();expect((await api(page).state()).sound).toBe(false);\n  27 |  await page.locator('#about-open').click();await expect(page.locator('#about')).toBeVisible();await page.keyboard.press('Escape');await expect(page.locator('#about')).not.toBeVisible();\n  28 |  const shared=await page.evaluate(()=>(window as any).__counterpoint.share());expect(shared).toContain('#s=');await page.locator('#share').click();expect(await page.locator('#toast').textContent()||await page.locator('#share-dialog').isVisible()).toBeTruthy();\n    at /home/wael/music/tests/browser.spec.ts:25:76"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T05:23:48.935Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/wael/music/test-results/browser-real-controls-dete-a45fd-erse-sound-share-and-camera-firefox/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/wael/music/test-results/browser-real-controls-dete-a45fd-erse-sound-share-and-camera-firefox/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/wael/music/tests/browser.spec.ts",
+                    "column": 76,
+                    "line": 25
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-63520d88d3ecbe0844e6",
+          "file": "browser.spec.ts",
+          "line": 8,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-21T05:23:46.224Z",
+    "duration": 78875.349,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

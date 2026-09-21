@@ -49,8 +49,8 @@ reduced.addEventListener('change',e=>{if(e.matches)pause();});
 document.addEventListener('visibilitychange',()=>{hidden=document.hidden;if(hidden){input.cancel();pause();cancelAnimationFrame(raf);}else{lastFrame=performance.now();dirty=true;raf=requestAnimationFrame(frame);announce('Time held while you were away · Play to continue');}});
 canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();pause();cancelAnimationFrame(raf);fallback('The instrument is resting. Graphics were interrupted.');});
 canvas.addEventListener('webglcontextrestored',()=>{$('fallback').hidden=true;dirty=true;lastFrame=performance.now();raf=requestAnimationFrame(frame);announce('Graphics restored · Play to continue');});
-function frame(now:number){if(hidden)return;const elapsed=now-lastFrame;lastFrame=now;if(transport.playing&&elapsed<1000){frameTimes.push(elapsed);if(frameTimes.length>120)frameTimes.shift();}
- if(!params.has('quality')&&quality==='high'&&frameTimes.length===90&&frameTimes.reduce((a,b)=>a+b,0)/90>35){quality='low';s.setQuality('low');dirty=true;}
+function frame(now:number){if(hidden)return;const elapsed=now-lastFrame;lastFrame=now;if(transport.playing){frameTimes.push(elapsed);if(frameTimes.length>120)frameTimes.shift();}
+ if(!params.has('quality')&&quality==='high'&&frameTimes.length>=90&&frameTimes.reduce((a,b)=>a+b,0)/frameTimes.length>35){quality='low';s.setQuality('low');dirty=true;}
  if((dirty||transport.playing)&&(quality==='high'||now-lastDraw>=31||dirty)){const t=transport.read();s.update(t,score.at(t).mask,(i,e)=>score.audible(i,e));s.render();lastDraw=now;dirty=false;}
  if(transport.playing&&now-lastUI>120){updateUI();lastUI=now;}raf=requestAnimationFrame(frame);
 }

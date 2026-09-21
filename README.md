@@ -4,6 +4,10 @@ An impossible mechanical music box. Eight porcelain voices, brass tracks, a reve
 
 The instrument is a deterministic automaton, not a rigid-body simulation. Its score drives marble trajectories, lifting pockets, resonator deflection, and browser-synthesized sound. Turn the flywheel backward to hold an instant; turn forward to release it. Tap a porcelain resonator, or use **Notes**, to change the arrangement. Existing flights finish before a voice rests.
 
+[Open the instrument](https://why-el.github.io/counterpoint/) · [Still](https://wael.khobalatte.com/counterpoint/still.jpg) · [Browser recording](https://wael.khobalatte.com/counterpoint/counterpoint.webm)
+
+The GitHub Pages address uses the existing site’s custom domain, `wael.khobalatte.com`.
+
 ## Build
 
 Node 22.12 or newer:
@@ -30,7 +34,7 @@ Test hooks are available in development or with `?test=1`. Add `t=21` for an exa
 
 ## Playing
 
-Drag empty space to orbit; scroll to zoom. Focus the sculpture and use the arrow keys, + / −, and Home for the keyboard equivalents. **Pause**, the time control, **Notes**, **Sound**, **Reset**, and **Share** are native HTML controls. Wheel reverse is deliberately silent. A forward release resumes playback; a backward release holds time. Reduced-motion visitors start paused. Returning from a hidden tab also holds time, with no audio backlog.
+Drag empty space to orbit; pinch or scroll to zoom. Focus the sculpture and use the arrow keys, + / −, and Home for the keyboard equivalents. **Pause**, the time control, **Notes**, **Sound**, **Reset**, and **Share** are native HTML controls. Wheel reverse is deliberately silent. A forward release resumes playback; a backward release holds time. Reduced-motion visitors start paused. Returning from a hidden tab also holds time, with no audio backlog.
 
 The three arrangements are Stillwater, Interlace, and Afterglow. Pitches are D3, A3, D4, E4, F4, A4, C5, and E5. Original modal synthesis provides porcelain, tine, and soft bell timbres. A 24-second machine turn and alternating phrase density leave intentional rests.
 

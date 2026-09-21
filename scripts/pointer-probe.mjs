@@ -1,0 +1,6 @@
+import {chromium} from '@playwright/test';
+const b=await chromium.launch({headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});try{const p=await b.newPage({viewport:{width:1280,height:900}});await p.goto('http://localhost:5174/?test=1&t=22&quality=low');await p.waitForFunction(()=>!!window.__counterpoint);
+await p.locator('#scene').focus();await p.keyboard.press('ArrowRight');await p.keyboard.press('Home');
+const w=await p.evaluate(()=>window.__counterpoint.targets());console.log('targets',w);console.log('element',await p.evaluate(w=>({el:document.elementFromPoint(w.x,w.y)?.outerHTML.slice(0,200),hit:window.__counterpoint.hit(w.x,w.y),before:window.__counterpoint.state()}),w.wheel));
+await p.evaluate(()=>{window.pointerLog=[];const c=document.querySelector('canvas');for(const type of ['pointerdown','pointermove','pointerup','pointercancel','lostpointercapture'])c.addEventListener(type,e=>window.pointerLog.push({type,x:e.clientX,y:e.clientY,id:e.pointerId,hit:window.__counterpoint.hit(e.clientX,e.clientY),state:window.__counterpoint.state()}));});
+await p.mouse.move(w.wheel.x,w.wheel.y);await p.mouse.down();await p.mouse.move(w.wheel.x-52,w.wheel.y-15,{steps:8});await p.mouse.up();console.log(JSON.stringify(await p.evaluate(()=>window.pointerLog)));}finally{await b.close();}

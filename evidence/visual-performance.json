@@ -1,0 +1,279 @@
+{
+  "revision": "d8095292f9ee7e364592b7135d17dcd815f4e9a5",
+  "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
+  "errors": [],
+  "heapBefore": 12203672,
+  "highTiming": {
+    "durationMs": 6103.899999856949,
+    "samples": 22,
+    "meanMs": 277.44999999349767,
+    "p95Ms": 1949.8999999999942,
+    "maximumMs": 3833.0999999999913
+  },
+  "high": {
+    "calls": 88,
+    "triangles": 228924,
+    "geometries": 25,
+    "textures": 7,
+    "quality": "high",
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "frameSamples": 20,
+    "meanFrameMs": 16.67500000000073
+  },
+  "lowTiming": {
+    "durationMs": 10033.199999904638,
+    "samples": 6,
+    "meanMs": 1672.1999999841064,
+    "p95Ms": 4133.100000000006,
+    "maximumMs": 4133.100000000006
+  },
+  "low": {
+    "calls": 51,
+    "triangles": 117264,
+    "geometries": 25,
+    "textures": 7,
+    "quality": "low",
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "frameSamples": 21,
+    "meanFrameMs": 17.4666666666675
+  },
+  "heapAfter": 12308356,
+  "nativeHidden": {
+    "hidden": false,
+    "state": {
+      "time": 64.97019999980925,
+      "playing": true,
+      "scrubbing": false,
+      "sound": false,
+      "audioState": "not-created",
+      "score": {
+        "mask": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "variation": 0,
+        "seed": 37
+      },
+      "revisions": [
+        {
+          "at": -1000000000000,
+          "config": {
+            "mask": [
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true
+            ],
+            "variation": 0,
+            "seed": 37
+          }
+        }
+      ],
+      "camera": [
+        0.675,
+        0.9500000000000001,
+        13.5
+      ],
+      "quality": "low",
+      "hidden": false
+    }
+  },
+  "simulatedHidden": {
+    "time": 93.70509999990463,
+    "playing": false,
+    "scrubbing": false,
+    "sound": false,
+    "audioState": "not-created",
+    "score": {
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "variation": 0,
+      "seed": 37
+    },
+    "revisions": [
+      {
+        "at": -1000000000000,
+        "config": {
+          "mask": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "variation": 0,
+          "seed": 37
+        }
+      }
+    ],
+    "camera": [
+      0.675,
+      0.9500000000000001,
+      13.5
+    ],
+    "quality": "low",
+    "hidden": true
+  },
+  "restored": {
+    "time": 93.70509999990463,
+    "playing": false,
+    "scrubbing": false,
+    "sound": false,
+    "audioState": "not-created",
+    "score": {
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "variation": 0,
+      "seed": 37
+    },
+    "revisions": [
+      {
+        "at": -1000000000000,
+        "config": {
+          "mask": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "variation": 0,
+          "seed": 37
+        }
+      }
+    ],
+    "camera": [
+      0.675,
+      0.9500000000000001,
+      13.5
+    ],
+    "quality": "low",
+    "hidden": false
+  },
+  "outsideRelease": {
+    "time": 17.122203674422515,
+    "playing": false,
+    "scrubbing": false,
+    "sound": false,
+    "audioState": "not-created",
+    "score": {
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "variation": 0,
+      "seed": 37
+    },
+    "revisions": [
+      {
+        "at": -1000000000000,
+        "config": {
+          "mask": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "variation": 0,
+          "seed": 37
+        }
+      }
+    ],
+    "camera": [
+      0.675,
+      0.9500000000000001,
+      13.5
+    ],
+    "quality": "low",
+    "hidden": false
+  },
+  "escapeCancel": {
+    "time": 17.122203674422515,
+    "playing": false,
+    "scrubbing": false,
+    "sound": false,
+    "audioState": "not-created",
+    "score": {
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "variation": 0,
+      "seed": 37
+    },
+    "revisions": [
+      {
+        "at": -1000000000000,
+        "config": {
+          "mask": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "variation": 0,
+          "seed": 37
+        }
+      }
+    ],
+    "camera": [
+      0.675,
+      0.9500000000000001,
+      13.5
+    ],
+    "quality": "low",
+    "hidden": false
+  }
+}
