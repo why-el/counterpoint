@@ -1,0 +1,11 @@
+import './style.css';
+import {createSculpture} from './scene';
+const params=new URLSearchParams(location.search);
+const sculpture=createSculpture(document.querySelector('#scene')!,1,Number(params.get('lighting')||0));
+let time=Number(params.get('t')||0),playing=!params.has('t'),last=performance.now();
+if(params.has('angle'))sculpture.setCamera([Number(params.get('angle')),.95,13]);
+const button=document.querySelector<HTMLButtonElement>('#play')!; const slider=document.querySelector<HTMLInputElement>('#time')!;
+button.onclick=()=>{playing=!playing;button.textContent=playing?'Pause':'Play';};slider.oninput=()=>{playing=false;time=Number(slider.value);button.textContent='Play';sculpture.update(time);sculpture.render();};
+sculpture.controls.addEventListener('change',()=>sculpture.render());sculpture.update(time);sculpture.render();
+function frame(now:number){if(playing){time+=(now-last)/1000;sculpture.update(time);sculpture.render();}last=now;slider.value=String(time%24);document.querySelector('#clock')!.textContent=(time%24).toFixed(2);requestAnimationFrame(frame);}requestAnimationFrame(frame);
+(window as any).__counterpoint={setTime:(t:number)=>{time=t;playing=false;sculpture.update(time);sculpture.render();},setCamera:sculpture.setCamera,stats:sculpture.stats,state:()=>({time,playing}),sculpture};
