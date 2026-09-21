@@ -4,3 +4,5 @@ test-results/
 playwright-report/
 .publish/
 .clean-check/
+
+.qa-audio/

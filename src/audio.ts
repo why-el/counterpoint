@@ -10,9 +10,12 @@ export function voice(ctx:BaseAudioContext,destination:AudioNode,note:number,at:
  return nodes;
 }
 export class InstrumentAudio {
- context:AudioContext|null=null;private output:GainNode|null=null;private compressor:DynamicsCompressorNode|null=null;private voices:{nodes:OscillatorNode[];until:number}[]=[];enabled=false;cursor=-Infinity;generation=0;scheduled:{id:string;time:number;generation:number}[]=[];
- async enable(){if(!this.context){this.context=new AudioContext({latencyHint:'interactive'});this.compressor=this.context.createDynamicsCompressor();this.compressor.threshold.value=-16;this.compressor.knee.value=12;this.compressor.ratio.value=4;this.compressor.attack.value=.003;this.compressor.release.value=.25;this.compressor.connect(this.context.destination);}
- await this.context.resume();this.enabled=true;this.cancel();}
+ context:AudioContext|null=null;private output:GainNode|null=null;private compressor:DynamicsCompressorNode|null=null;private voices:{nodes:OscillatorNode[];until:number}[]=[];enabled=false;starting=false;cursor=-Infinity;generation=0;scheduled:{id:string;time:number;generation:number}[]=[];
+ async enable(){this.starting=true;let timer:ReturnType<typeof setTimeout>|undefined;
+ try{if(!this.context){this.context=new AudioContext({latencyHint:'interactive'});this.compressor=this.context.createDynamicsCompressor();this.compressor.threshold.value=-16;this.compressor.knee.value=12;this.compressor.ratio.value=4;this.compressor.attack.value=.003;this.compressor.release.value=.25;this.compressor.connect(this.context.destination);}
+ await Promise.race([this.context.resume(),new Promise<never>((_,reject)=>{timer=setTimeout(()=>reject(new Error('Audio output did not start')),5000);})]);this.enabled=true;this.cancel();
+ }finally{if(timer)clearTimeout(timer);this.starting=false;}}
+
  cancel(){this.generation++;this.cursor=-Infinity;if(!this.context)return;const now=this.context.currentTime;
  if(this.output){const old=this.output;old.gain.cancelScheduledValues(now);old.gain.setTargetAtTime(0,now,.008);setTimeout(()=>old.disconnect(),70);}
  for(const v of this.voices)for(const n of v.nodes)try{n.stop(now+.04);}catch{}

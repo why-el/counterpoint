@@ -22,8 +22,14 @@ test('real controls, deterministic reverse, sound, share, and camera',async({pag
  const w=await page.evaluate(()=>(window as any).__counterpoint.targets());const hit=await page.evaluate(p=>(window as any).__counterpoint.hit(p.x,p.y),w.wheel);expect(hit.kind).toBe('wheel');const before=(await api(page).state()).time;
  await page.mouse.move(w.wheel.x,w.wheel.y);await page.mouse.down();await page.mouse.move(w.wheel.x-52,w.wheel.y-15,{steps:8});await page.mouse.up();expect(Math.abs((await api(page).state()).time-before)).toBeGreaterThan(.05);await page.evaluate(()=>(window as any).__counterpoint.pause());
  await page.locator('#variation').click();expect((await api(page).state()).score.variation).toBe(1);
- await page.locator('#sound').click();await expect(page.locator('#sound')).toHaveAttribute('aria-pressed','true');expect((await api(page).state()).audioState).toBe('running');await page.locator('#play').click();await page.waitForTimeout(600);await page.locator('#play').click();
- await page.locator('#sound').click();expect((await api(page).state()).sound).toBe(false);
+ await page.locator('#sound').click();
+ if(browserName==='firefox'&&process.env.COUNTERPOINT_NO_AUDIO==='1'){
+  await expect(page.locator('#toast')).toContainText('Sound could not start');expect((await api(page).state()).sound).toBe(false);test.info().annotations.push({type:'coverage',description:'Firefox audio output UNVERIFIED: no functioning server audio sink; graceful startup timeout verified.'});
+ }else{
+  await expect(page.locator('#sound')).toHaveAttribute('aria-pressed','true');expect((await api(page).state()).audioState).toBe('running');await page.locator('#play').click();await page.waitForTimeout(600);await page.locator('#play').click();
+  await page.locator('#sound').click();expect((await api(page).state()).sound).toBe(false);
+ }
+
  await page.locator('#about-open').click();await expect(page.locator('#about')).toBeVisible();await page.keyboard.press('Escape');await expect(page.locator('#about')).not.toBeVisible();
  const shared=await page.evaluate(()=>(window as any).__counterpoint.share());expect(shared).toContain('#s=');await page.locator('#share').click();expect(await page.locator('#toast').textContent()||await page.locator('#share-dialog').isVisible()).toBeTruthy();
  const saved=(await api(page).state()).score;await page.goto(shared.replace('#','?test=1&t=17.3&quality=low#'));await page.waitForFunction(()=>!!(window as any).__counterpoint);expect((await api(page).state()).score).toEqual(saved);expect((await api(page).state()).sound).toBe(false);
@@ -40,6 +46,10 @@ test('responsive layouts, reduced motion, keyboard and touch emulation',async({p
  await page.locator('#sound').focus();await expect(page.locator('#sound')).toBeFocused();expect(await page.locator('#sound').evaluate(el=>getComputedStyle(el).outlineStyle)).not.toBe('none');await page.keyboard.press('Tab');await expect(page.locator('#play')).toBeFocused();
  const context=await browser.newContext({viewport:{width:390,height:844},hasTouch:true,isMobile:true,reducedMotion:'reduce'});const touch=await context.newPage();await touch.goto(new URL('?test=1&quality=low',page.url()).href);await touch.waitForFunction(()=>!!(window as any).__counterpoint);await touch.locator('#parts').tap();await touch.getByRole('button',{name:'A3 voice',exact:true}).tap();expect((await api(touch).state()).score.mask[1]).toBe(false);
  const target=await touch.evaluate(()=>(window as any).__counterpoint.targets().notes[0]);await touch.touchscreen.tap(target.x,target.y);expect((await api(touch).state()).score.mask[0]).toBe(false);
+ await touch.locator('#parts').tap();const beforePinch=(await api(touch).state()).camera[2];const maskBefore=(await api(touch).state()).score.mask;const cdp=await context.newCDPSession(touch);
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:115,y:610,id:0},{x:275,y:610,id:1}]});
+ for(let i=1;i<=5;i++)await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:115-i*10,y:610,id:0},{x:275+i*10,y:610,id:1}]});
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});expect((await api(touch).state()).camera[2]).toBeLessThan(beforePinch-1);expect((await api(touch).state()).camera[2]).toBeGreaterThanOrEqual(7.7);expect((await api(touch).state()).score.mask).toEqual(maskBefore);expect((await api(touch).state()).scrubbing).toBe(false);
  await context.close();
 });
 test('resilience, bounded URLs, offline operation and context restoration',async({page,browserName})=>{
