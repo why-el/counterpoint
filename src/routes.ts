@@ -1,36 +1,36 @@
 import * as THREE from 'three';
 export const TAU = Math.PI*2;
 export const CYCLE = 24;
+export const PHASES=[0,4.5,6,10.5,13.5,15,19.5,21];
+export const railProgress=(u:number)=>.25*u+.75*Math.pow(u,1.65);
 export const BALL_R = .095;
-export const WHEEL = new THREE.Vector3(-1.65, 2.38, -.62);
+export const WHEEL = new THREE.Vector3(-1.65, 2.38, 0);
 export const WHEEL_R = 1.78;
 export const mod = (a:number,b:number)=>((a%b)+b)%b;
 export const ease=(t:number)=>t*t*(3-2*t);
 export interface Route { index:number; offset:number; z:number; top:THREE.Vector3; bottom:THREE.Vector3; plate:THREE.Vector3; travel:THREE.CatmullRomCurve3; returning:THREE.CatmullRomCurve3; }
 export function makeRoute(index:number):Route {
-  const z = WHEEL.z+.06+index*.046;
+  const z=-.91+index*.26;
   const top = new THREE.Vector3(WHEEL.x, WHEEL.y+WHEEL_R,z);
   const bottom = new THREE.Vector3(WHEEL.x,WHEEL.y-WHEEL_R,z);
-  const a = -.10+index*.225;
-  const radius=2.24-index*.11;
-  const plate = new THREE.Vector3(Math.cos(a)*radius, .92 + index*.063, Math.sin(a)*radius+.40);
-  const release = plate.clone().add(new THREE.Vector3(-.05,.44,-.08));
+  const plate = new THREE.Vector3(2.30-.025*(index-3.5)**2,.96+.04*Math.cos(index*.5),z);
+  const release = plate.clone().add(new THREE.Vector3(-.05,.44,0));
   const travel = new THREE.CatmullRomCurve3([
     top,
-    new THREE.Vector3(-.70,4.10-index*.038,-1.16-index*.078),
-    new THREE.Vector3(1.24+index*.035,3.54-index*.103,-1.72+index*.070),
-    new THREE.Vector3(2.65-index*.088,2.54-index*.073,-.89+index*.082),
-    new THREE.Vector3(2.82-index*.095,1.76+index*.016,.12+index*.067),
+    new THREE.Vector3(-.70,4.13,z),
+    new THREE.Vector3(.83,3.71-index*.027,z),
+    new THREE.Vector3(plate.x-.50,2.93-index*.028,z),
+    new THREE.Vector3(plate.x-.14,2.00,z),
     release
   ],false,'centripetal');
   const returning = new THREE.CatmullRomCurve3([
-    plate.clone().add(new THREE.Vector3(-.16, .13, .30)),
-    new THREE.Vector3(plate.x-.4,.69,plate.z+.55),
-    new THREE.Vector3(.10-index*.07,.50,1.53-index*.08),
-    new THREE.Vector3(-1.38,.48,.76-index*.045),
+    plate.clone().add(new THREE.Vector3(-.53,.17,0)),
+    new THREE.Vector3(plate.x-.83,.66,z),
+    new THREE.Vector3(.05,.47,z),
+    new THREE.Vector3(-1.15,.51,z),
     bottom
   ],false,'centripetal');
-  return {index,offset:index*3,z,top,bottom,plate,travel,returning};
+  return {index,offset:PHASES[index],z,top,bottom,plate,travel,returning};
 }
 export function sampleRoute(r:Route,t:number): {position:THREE.Vector3; stage:string; age:number; visible:boolean; impact:number} {
   const age=mod(t-r.offset+13.5,CYCLE)-13.5;
@@ -40,7 +40,7 @@ export function sampleRoute(r:Route,t:number): {position:THREE.Vector3; stage:st
     p=new THREE.Vector3(WHEEL.x+WHEEL_R*Math.cos(angle),WHEEL.y+WHEEL_R*Math.sin(angle),r.z);stage='lift';
   } else if(age<-.30) {
     const u=(age+7.5)/7.2;
-    p=r.travel.getPointAt(u);stage='rail';
+    p=r.travel.getPointAt(railProgress(u));stage='rail';
   } else if(age<0) {
     const u=(age+.30)/.30;
     p=r.travel.getPointAt(1).lerp(r.plate.clone().add(new THREE.Vector3(0,BALL_R+.045,0)),u*u);stage='drop';
@@ -55,6 +55,6 @@ export function sampleRoute(r:Route,t:number): {position:THREE.Vector3; stage:st
 }
 export function railCurve(curve:THREE.Curve<THREE.Vector3>,side:number):THREE.CatmullRomCurve3 {
  const pts:THREE.Vector3[]=[];
- for(let i=0;i<=144;i++){ const t=i/144;const p=curve.getPointAt(t);const tangent=curve.getTangentAt(t);const normal=new THREE.Vector3(-tangent.z,0,tangent.x).normalize();p.addScaledVector(normal,side*.061);p.y-=.087;pts.push(p); }
+ for(let i=0;i<=144;i++){ const t=i/144;const p=curve.getPointAt(t);const tangent=curve.getTangentAt(t);const lateral=new THREE.Vector3(0,0,1);const down=new THREE.Vector3().crossVectors(tangent,lateral).normalize();if(down.y>0)down.negate();p.addScaledVector(lateral,side*.061).addScaledVector(down,.094);pts.push(p); }
  return new THREE.CatmullRomCurve3(pts);
 }

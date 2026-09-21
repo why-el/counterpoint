@@ -1,6 +1,6 @@
-import {CYCLE,mod} from './routes';
+import {CYCLE,mod,PHASES} from './routes';
 export const NOTES=[{name:'D3',hz:146.832,type:0},{name:'A3',hz:220,type:1},{name:'D4',hz:293.665,type:0},{name:'E4',hz:329.628,type:2},{name:'F4',hz:349.228,type:1},{name:'A4',hz:440,type:0},{name:'C5',hz:523.251,type:2},{name:'E5',hz:659.255,type:1}];
-export const OFFSETS=[0,4.5,6,10.5,12,16.5,18,22.5];
+export const OFFSETS=PHASES;
 export const VARIATIONS=['Stillwater','Interlace','Afterglow'];
 export type ScoreConfig={mask:boolean[];variation:number;seed:number};
 export type Revision={at:number;config:ScoreConfig};
