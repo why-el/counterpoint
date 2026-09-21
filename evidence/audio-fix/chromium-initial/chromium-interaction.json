@@ -1,0 +1,27 @@
+{
+  "errors": [],
+  "stats": {
+    "calls": 45,
+    "triangles": 114336,
+    "geometries": 25,
+    "textures": 5,
+    "quality": "low",
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "frameSamples": 14,
+    "meanFrameMs": 189.27857142857127
+  },
+  "sharedState": {
+    "mask": [
+      false,
+      true,
+      false,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "variation": 1,
+    "seed": 37
+  }
+}

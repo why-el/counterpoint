@@ -1,9 +1,9 @@
 # Costs
-Ceiling authorized: $500 incremental. Suggested refinement reserve: $150.
-Observed new paid resources/purchases: none ($0).
-Existing DigitalOcean runtime, agent/model subscription and tool charges: not exposed; unknown, not represented as free or measured.
-No paid APIs, generated images, external asset purchases, new droplets, or unattended billable jobs launched. npm and local browser tooling only.
 
-A private, rootless audio-runtime diagnostic downloaded 931 kB of free Ubuntu packages; it did not install a system service and stopped after three missing-library failures. This is not a new paid resource. Existing VM and agent charges remain unknown. Substantial final-session work was reserved for reviews and corrections; no additional features or billable jobs were launched to consume the refinement allocation.
+The authorized incremental ceiling is $500, including a suggested $150 reserve for review and corrections.
 
-Final accounting: no new paid purchase or provider resource was created ($0 observed). Model/tool subscriptions and the already-running DigitalOcean VM are unmetered to this session. No defensible total-cost estimate is available from those incomplete records. The complete static release has no ongoing application-server, paid API, asset subscription or runtime model requirement.
+No new paid resources or purchases were created: $0 observed. Charges for the existing DigitalOcean VM, model subscription, and tools are unavailable. Those unknown charges prevent a defensible total-cost estimate.
+
+Work used npm packages and local browser tools. No paid API, asset purchase, new droplet, or unattended billable job was started. A rootless audio diagnostic downloaded 931 kB of free Ubuntu packages and stopped after three missing-library failures; it installed no system service.
+
+The 1.0.1 audio and prose changes use the same environment and require no additional paid resource. The published static application has no server, paid API, asset subscription, or runtime model requirement.

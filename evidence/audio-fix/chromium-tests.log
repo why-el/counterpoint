@@ -1,0 +1,38 @@
+
+Running 6 tests using 1 worker
+
+(node:3218722) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/audio-output.spec.ts:5:2 › recorded output survives a rendering stall (3.7s)
+  ✓  2 [chromium] › tests/audio-output.spec.ts:5:2 › recorded output cancels queued notes during a stall (3.4s)
+  ✓  3 [chromium] › tests/browser.spec.ts:8:1 › real controls, deterministic reverse, sound, share, and camera (1.0m)
+  ✓  4 [chromium] › tests/browser.spec.ts:38:1 › responsive layouts, reduced motion, keyboard and touch emulation (58.1s)
+  ✘  5 [chromium] › tests/browser.spec.ts:55:1 › resilience, bounded URLs, offline operation and context restoration (3.1m)
+(node:3221657) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  6 [chromium] › tests/browser.spec.ts:66:1 › audio waveform, scheduling, suspension and no duplicate strikes (36.9s)
+
+
+  1) [chromium] › tests/browser.spec.ts:55:1 › resilience, bounded URLs, offline operation and context restoration 
+
+    Error: page.evaluate: Execution context was destroyed, most likely because of a navigation
+
+      1 | import {test,expect,type Page} from '@playwright/test';
+      2 | import {mkdir,writeFile} from 'node:fs/promises';
+    > 3 | const api=(page:Page)=>({state:()=>page.evaluate(()=>(window as any).__counterpoint.state())});
+        |                                         ^
+      4 | async function open(page:Page,suffix='?test=1&t=17.3&quality=low'){
+      5 |  await page.goto('./'+suffix);await page.waitForFunction(()=>!!(window as any).__counterpoint||!document.getElementById('fallback')!.hidden);
+      6 |  return await page.evaluate(()=>!!(window as any).__counterpoint);
+        at Object.state (/home/wael/music/tests/browser.spec.ts:3:41)
+        at /home/wael/music/tests/browser.spec.ts:61:150
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/browser-resilience-bounded-3cade-ion-and-context-restoration-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/browser-resilience-bounded-3cade-ion-and-context-restoration-chromium/error-context.md
+
+  1 failed
+    [chromium] › tests/browser.spec.ts:55:1 › resilience, bounded URLs, offline operation and context restoration 
+  5 passed (7.0m)

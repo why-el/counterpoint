@@ -1,61 +1,82 @@
 # Counterpoint
 
-An impossible mechanical music box. Eight porcelain voices, brass tracks, a reversible flywheel, and a stone plinth. Silent until you switch sound on.
+[Open Counterpoint](https://why-el.github.io/counterpoint/) · [Still image](https://wael.khobalatte.com/counterpoint/still.jpg) · [Browser recording](https://wael.khobalatte.com/counterpoint/counterpoint.webm)
 
-The instrument is a deterministic automaton, not a rigid-body simulation. Its score drives marble trajectories, lifting pockets, resonator deflection, and browser-synthesized sound. Turn the flywheel backward to hold an instant; turn forward to release it. Tap a porcelain resonator, or use **Notes**, to change the arrangement. Existing flights finish before a voice rests.
+Counterpoint is a 3D music box with eight porcelain resonators, brass tracks, and a reversible flywheel. Marble strikes play synthesized notes after you press Sound. Drag the wheel backward to rewind, release it to pause, or turn it forward to resume. Tap a resonator or use Notes to change the arrangement. Moving marbles finish their routes.
 
-[Open the instrument](https://why-el.github.io/counterpoint/) · [Still](https://wael.khobalatte.com/counterpoint/still.jpg) · [Browser recording](https://wael.khobalatte.com/counterpoint/counterpoint.webm)
-
-The GitHub Pages address uses the existing site’s custom domain, `wael.khobalatte.com`.
+The GitHub Pages address redirects to the existing custom domain, `wael.khobalatte.com`.
 
 ## Build
 
-Node 22.12 or newer:
+Requires Node 22.12 or newer:
 
 ```sh
 npm ci
-npm run dev
 npm test
 npm run build
 ```
 
-`dist/` is entirely static. `npm run preview` serves that exact build. Relative asset URLs allow deployment under a GitHub Pages project directory. No API server, fonts, audio samples, tracking, external textures, or runtime network calls are required.
+`dist/` contains the static site. Use `npm run dev` during development or `npm run preview` to serve the build. Relative asset URLs support a GitHub Pages project directory. Geometry, textures, interface assets, and sounds are generated locally; the application needs no API server or external assets at runtime.
 
-## Browser verification
+## Browser tests
+
+Start the development server on the test port:
+
+```sh
+npm run dev -- --port 5174 --strictPort
+```
+
+In another terminal:
 
 ```sh
 npx playwright install chromium firefox webkit
 npm run test:browser
 ```
 
-Use `COUNTERPOINT_URL=https://…/counterpoint/ npm run test:browser` to exercise the published artifact. Browser availability and operating-system libraries vary. The verification log distinguishes actual interaction passes, unavailable graphics, emulation, and unverified physical hardware.
+Operating-system browser libraries may also be required. `COUNTERPOINT_URL=https://…/counterpoint/ npm run test:browser` runs the application tests against a published build. The audio fixture tests run only against the local development server. They record the output after the compressor, check a 2.5-second main-thread stall, and verify cancellation of queued notes.
 
-Test hooks are available in development or with `?test=1`. Add `t=21` for an exact held instant, `quality=low` or `quality=high` for a fixed quality tier, and `single=1` for the original one-route gate. Normal visitors see no developer panel. `release.json` records the source revision and build time; the static artifact is built after the source commit, so metadata does not create a self-referential commit requirement.
+To record audio from the running application:
 
-## Playing
+```sh
+node scripts/audio-output-probe.mjs http://localhost:5174/ local-output
+```
 
-Drag empty space to orbit; pinch or scroll to zoom. Focus the sculpture and use the arrow keys, + / −, and Home for the keyboard equivalents. **Pause**, the time control, **Notes**, **Sound**, **Reset**, and **Share** are native HTML controls. Wheel reverse is deliberately silent. A forward release resumes playback; a backward release holds time. Reduced-motion visitors start paused. Returning from a hidden tab also holds time, with no audio backlog.
+The recording and numerical report are written to `evidence/audio-fix/`. This checks the browser's generated signal; it cannot verify the listener's speakers or listening experience.
 
-The three arrangements are Stillwater, Interlace, and Afterglow. Pitches are D3, A3, D4, E4, F4, A4, C5, and E5. Original modal synthesis provides porcelain, tine, and soft bell timbres. A 24-second machine turn and alternating phrase density leave intentional rests.
+Test hooks are enabled in development or with `?test=1`. Add `t=21` to pause at an exact time, `quality=low` or `quality=high` to select rendering quality, and `single=1` to show the original single route. These hooks have no visible developer panel.
 
-## Time and revision contract
+## Controls
 
-All actors derive from one signed transport time. Enabling audio rebases that transport onto the audio clock without a visual jump. Scheduling uses the same analytical event list with a bounded 140 ms lookahead. Pause, seek, edit, suspension, and visibility transitions cancel the outgoing audio bus.
+Drag empty space to rotate the view; pinch or scroll to zoom. With the canvas focused, arrow keys rotate, + / − zoom, Home resets, and Space toggles playback. Sound, Play/Pause, the time slider, Notes, Reset, and Share are native HTML controls.
 
-Edits latch on the next three-second grid boundary. A marble remembers the score at the beginning of its lift, 13.5 seconds before impact; launched marbles always complete their journey. Thus an outgoing voice may leave a final echo. The current session retains score revisions for scrubbing; an edit from a past instant replaces later edits. The visible time control spans a 48-second phrase, and the wheel can cross its boundaries. Shared URLs contain the desired arrangement, bounded seed, and bounded camera, not edit history, sound permission, or transport position.
+Reverse and manual scrubbing are silent. Reduced-motion visitors start paused. Returning from a hidden tab requires Play, which prevents missed notes from playing as a burst.
 
-## Pinned release
+Stillwater, Interlace, and Afterglow use D3, A3, D4, E4, F4, A4, C5, and E5, with porcelain, tine, and bell timbres. The arrangements contain 14, 12, and 8 strikes per 48-second phrase.
 
-Published source: [`c7c18ac`](https://github.com/why-el/counterpoint/commit/c7c18ac8f56718f6cecf71421b5fe3c68a5f9582). The [v1.0.0 release](https://github.com/why-el/counterpoint/releases/tag/v1.0.0) retains the exact static archive. To reproduce the source build, check out `v1.0.0` before the commands above. Build timestamps differ when rebuilding; the retained archive is the published artifact.
+## Time and score changes
 
-Two consecutive production browser checks passed on this source revision, with identical release metadata before and after each. The reports and desktop/mobile captures are in `evidence/live-1*` and `evidence/live-2*`. The initial paused-resize failure and its correction are retained in the review log.
+One signed transport time determines the score, marble positions, lifting pockets, and resonator movement. Enabling sound switches the transport to the audio clock while preserving its position. Audio uses the same event list and schedules up to one 24-second machine cycle ahead. Pause, seek, edit, context suspension, and hidden-tab transitions cancel the outgoing audio bus.
 
-On this Linux server, the additional Firefox 3D check used `COUNTERPOINT_HEADED=1 COUNTERPOINT_NO_AUDIO=1 xvfb-run -a npx playwright test --project=firefox -g 'real controls'`. That mode explicitly verifies the unavailable-audio message; it does not claim Firefox audible output works in the server environment.
+Edits activate on the next three-second boundary. Each marble uses the score from the start of its lift, 13.5 seconds before impact, so an outgoing note can still sound during that interval. Session revisions remain available for scrubbing; editing a past instant replaces later edits. The slider spans 48 seconds, and the wheel can cross phrase boundaries.
 
-## Review and limitations
+Shared URLs include the selected arrangement, validated seed, and bounded camera state. They omit edit history, sound permission, and transport position. A shared link starts with sound off.
 
-See [REVIEW_LOG.md](REVIEW_LOG.md), [STATUS.md](STATUS.md), [DECISIONS.md](DECISIONS.md), and [COSTS.md](COSTS.md). Actual captures and machine-readable reports are in [evidence/](evidence/). Numerical audio analysis does not establish musical or timbral listening quality. Software-rendered browser runs are not phone or laptop performance results.
+## Releases and evidence
 
-All geometry, material textures, synthesis, and interface assets are generated locally. Three.js uses the MIT license; other bundled dependencies retain their package licenses. No commercial recordings or third-party models are used.
+`release.json` records the source revision, package version, and build time. Build after committing the source to avoid a self-referential revision. Release archives retain the published files; rebuilding the same source changes the build timestamp.
 
-Official references checked during implementation: [Three.js renderer](https://threejs.org/docs/pages/WebGLRenderer.html), [instancing](https://threejs.org/docs/pages/InstancedMesh.html), [physical materials](https://threejs.org/docs/pages/MeshPhysicalMaterial.html), [Web Audio](https://www.w3.org/TR/webaudio/), [audio activation](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Best_practices), [Playwright emulation](https://playwright.dev/docs/emulation), and [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages).
+The [v1.0.0 archive](https://github.com/why-el/counterpoint/releases/tag/v1.0.0) retains the first published build, source `c7c18ac`. Version 1.0.1 raises output gain by about 5 dB, protects scheduled notes from rendering stalls, and revises interface and documentation text. See [STATUS.md](STATUS.md) for deployment status and [REVIEW_LOG.md](REVIEW_LOG.md) for tests, defects, corrections, and coverage limits.
+
+On this server, Firefox 3D tests require a virtual display:
+
+```sh
+COUNTERPOINT_HEADED=1 COUNTERPOINT_NO_AUDIO=1 xvfb-run -a npx playwright test --project=firefox -g 'real controls'
+```
+
+That command checks Firefox's audio-startup failure message because the server has no working Firefox audio sink. It does not verify Firefox audio output.
+
+Physical phones, ordinary hardware GPU performance, screen-reader listening, musical listening, and multi-hour operation remain unverified. Browser emulation and waveform analysis cover narrower behavior. The seven review scopes and their evidence are recorded in the review log.
+
+[DECISIONS.md](DECISIONS.md) records implementation choices; [COSTS.md](COSTS.md) separates observed purchases from unknown charges. Three.js uses the MIT license, and bundled dependencies retain their licenses. No commercial recordings or third-party models are used.
+
+References checked during implementation: [Three.js renderer](https://threejs.org/docs/pages/WebGLRenderer.html), [instancing](https://threejs.org/docs/pages/InstancedMesh.html), [physical materials](https://threejs.org/docs/pages/MeshPhysicalMaterial.html), [Web Audio](https://www.w3.org/TR/webaudio/), [audio activation](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Best_practices), [audio scheduling](https://web.dev/articles/audio-scheduling), [Playwright emulation](https://playwright.dev/docs/emulation), and [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages).

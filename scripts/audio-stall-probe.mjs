@@ -1,0 +1,4 @@
+import {chromium} from '@playwright/test';import {writeFile} from 'node:fs/promises';
+const name=process.argv[2]||'stall-current';const mode=process.argv[3]||'stall';
+const browser=await chromium.launch({headless:true,ignoreDefaultArgs:['--mute-audio'],args:['--no-sandbox']});
+try{const page=await browser.newPage();await page.goto('http://localhost:5174/tests/audio-harness.html');await page.waitForFunction(()=>typeof window.runAudioRegression==='function');await page.evaluate(mode=>{document.querySelector('#start').onclick=()=>{window.resultPromise=window.runAudioRegression(mode);};},mode);await page.locator('#start').click();const result=await page.evaluate(()=>window.resultPromise);await writeFile(`evidence/audio-fix/${name}.webm`,Buffer.from(result.base64,'base64'));delete result.base64;await writeFile(`evidence/audio-fix/${name}.json`,JSON.stringify(result,null,2));console.log(JSON.stringify(result));}finally{await browser.close();}

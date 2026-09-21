@@ -1,0 +1,165 @@
+{
+  "target": "http://localhost:5174/",
+  "name": "before",
+  "errors": [],
+  "enabled": {
+    "time": 20,
+    "playing": false,
+    "scrubbing": false,
+    "sound": true,
+    "audioState": "running",
+    "score": {
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "variation": 0,
+      "seed": 37
+    },
+    "revisions": [
+      {
+        "at": -1000000000000,
+        "config": {
+          "mask": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "variation": 0,
+          "seed": 37
+        }
+      }
+    ],
+    "camera": [
+      0.675,
+      0.9500000000000001,
+      13.5
+    ],
+    "quality": "low",
+    "hidden": false
+  },
+  "played": {
+    "time": 44.050068027210884,
+    "playing": true,
+    "scrubbing": false,
+    "sound": true,
+    "audioState": "running",
+    "score": {
+      "mask": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "variation": 0,
+      "seed": 37
+    },
+    "revisions": [
+      {
+        "at": -1000000000000,
+        "config": {
+          "mask": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "variation": 0,
+          "seed": 37
+        }
+      }
+    ],
+    "camera": [
+      0.675,
+      0.9500000000000001,
+      13.5
+    ],
+    "quality": "low",
+    "hidden": false
+  },
+  "scheduled": [
+    {
+      "id": "7:0",
+      "time": 21,
+      "generation": 2
+    },
+    {
+      "id": "0:1",
+      "time": 24,
+      "generation": 2
+    },
+    {
+      "id": "1:1",
+      "time": 28.5,
+      "generation": 2
+    },
+    {
+      "id": "2:1",
+      "time": 30,
+      "generation": 2
+    },
+    {
+      "id": "4:1",
+      "time": 37.5,
+      "generation": 2
+    },
+    {
+      "id": "5:1",
+      "time": 39,
+      "generation": 2
+    },
+    {
+      "id": "6:1",
+      "time": 43.5,
+      "generation": 2
+    }
+  ],
+  "output": {
+    "peak": 0.10367011278867722,
+    "rms": 0.011447549511517987,
+    "duration": 19.67997732426304,
+    "sampleRate": 44100,
+    "secondPeaks": [
+      2.034569958809697e-34,
+      0.07249750941991806,
+      0.005133968777954578,
+      0.00024061769363470376,
+      0.09913712739944458,
+      0.0020624627359211445,
+      0.00003074868436669931,
+      2.0345717955196202e-34,
+      0.07259166985750198,
+      0.10367011278867722,
+      0.017193056643009186,
+      0.00025899341562762856,
+      2.034569958809697e-34,
+      0.07123074680566788,
+      0.023759663105010986,
+      0.09577936679124832,
+      0.0021041501313447952,
+      0.0000309965071210172,
+      2.034569958809697e-34,
+      0.06891446560621262
+    ],
+    "mime": "audio/webm;codecs=opus"
+  }
+}

@@ -1,0 +1,10 @@
+
+Running 3 tests using 1 worker
+
+(node:3222800) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/audio-output.spec.ts:5:2 › recorded output survives a rendering stall (4.8s)
+  ✓  2 [chromium] › tests/audio-output.spec.ts:5:2 › recorded output cancels queued notes during a stall (4.4s)
+  ✓  3 [chromium] › tests/audio-output.spec.ts:26:1 › all arrangements retain headroom with the live gain and compressor (5.1s)
+
+  3 passed (18.9s)

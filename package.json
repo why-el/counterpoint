@@ -1,5 +1,5 @@
 {
-  "name": "counterpoint", "version": "1.0.0", "private": true, "type": "module",
+  "name": "counterpoint", "version": "1.0.1", "private": true, "type": "module",
   "description": "A reversible, playable mechanical music sculpture.",
   "scripts": { "dev": "vite --host 0.0.0.0", "build": "tsc --noEmit && vite build && node scripts/release.mjs", "preview": "vite preview --host 0.0.0.0", "test": "tsx --test tests/*.test.ts", "test:browser": "playwright test" },
   "dependencies": { "three": "0.186.0" },

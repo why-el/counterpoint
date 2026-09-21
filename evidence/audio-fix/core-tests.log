@@ -1,0 +1,86 @@
+
+> counterpoint@1.0.1 test
+> tsx --test tests/*.test.ts
+
+TAP version 13
+# Subtest: transport rebases clocks without jumping, pauses and seeks negative time
+ok 1 - transport rebases clocks without jumping, pauses and seeks negative time
+  ---
+  duration_ms: 3.497469
+  type: 'test'
+  ...
+# Subtest: positive modular arithmetic handles negative and loop times
+ok 2 - positive modular arithmetic handles negative and loop times
+  ---
+  duration_ms: 0.454312
+  type: 'test'
+  ...
+# Subtest: each trajectory is continuous at every route boundary, including negative time
+ok 3 - each trajectory is continuous at every route boundary, including negative time
+  ---
+  duration_ms: 53.430296
+  type: 'test'
+  ...
+# Subtest: trajectory sampling is deterministic and independent of order
+ok 4 - trajectory sampling is deterministic and independent of order
+  ---
+  duration_ms: 22.129327
+  type: 'test'
+  ...
+# Subtest: score scheduling partitions correctly without boundary duplicates
+ok 5 - score scheduling partitions correctly without boundary duplicates
+  ---
+  duration_ms: 8.099334
+  type: 'test'
+  ...
+# Subtest: score edits preserve every in-flight event
+ok 6 - score edits preserve every in-flight event
+  ---
+  duration_ms: 3.571182
+  type: 'test'
+  ...
+# Subtest: event lookup rejects unbounded requests
+ok 7 - event lookup rejects unbounded requests
+  ---
+  duration_ms: 0.333192
+  type: 'test'
+  ...
+# Subtest: shared state roundtrips with seed, mask and camera and bounds camera
+ok 8 - shared state roundtrips with seed, mask and camera and bounds camera
+  ---
+  duration_ms: 0.7021
+  type: 'test'
+  ...
+# Subtest: malformed and oversized shared state fails closed
+ok 9 - malformed and oversized shared state fails closed
+  ---
+  duration_ms: 2.081423
+  type: 'test'
+  ...
+# Subtest: each marble clears every neighboring rail on the full descent
+ok 10 - each marble clears every neighboring rail on the full descent
+  ---
+  duration_ms: 270.760342
+  type: 'test'
+  ...
+# Subtest: lift pockets stay synchronized to the shared wheel at negative and positive times
+ok 11 - lift pockets stay synchronized to the shared wheel at negative and positive times
+  ---
+  duration_ms: 1.809308
+  type: 'test'
+  ...
+# Subtest: every enabled note appears within two turns at the expected arrangement density
+ok 12 - every enabled note appears within two turns at the expected arrangement density
+  ---
+  duration_ms: 0.686634
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1806.445386

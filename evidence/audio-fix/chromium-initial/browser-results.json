@@ -1,0 +1,368 @@
+{
+  "config": {
+    "argv": [
+      "/usr/local/bin/node",
+      "/home/wael/music/node_modules/.bin/playwright",
+      "test",
+      "--project=chromium"
+    ],
+    "configFile": "/home/wael/music/playwright.config.ts",
+    "rootDir": "/home/wael/music/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/wael/music/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/home/wael/music/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "browser.spec.ts",
+          "audio-output.spec.ts"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/home/wael/music/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "firefox",
+        "name": "firefox",
+        "testDir": "/home/wael/music/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "browser.spec.ts",
+          "audio-output.spec.ts"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "/home/wael/music/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "webkit",
+        "name": "webkit",
+        "testDir": "/home/wael/music/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "browser.spec.ts",
+          "audio-output.spec.ts"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "evidence/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "audio-output.spec.ts",
+      "file": "audio-output.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "recorded output survives a rendering stall",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3687,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T19:19:46.351Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "42d735ec217b13c6bd7a-ad6f060195e66d2531bc",
+          "file": "audio-output.spec.ts",
+          "line": 5,
+          "column": 2
+        },
+        {
+          "title": "recorded output cancels queued notes during a stall",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3376,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T19:19:50.241Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "42d735ec217b13c6bd7a-f9ed38cfa0475dba2dbf",
+          "file": "audio-output.spec.ts",
+          "line": 5,
+          "column": 2
+        }
+      ]
+    },
+    {
+      "title": "browser.spec.ts",
+      "file": "browser.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "real controls, deterministic reverse, sound, share, and camera",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 62533,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T19:19:53.695Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-edcec82136570229d090",
+          "file": "browser.spec.ts",
+          "line": 8,
+          "column": 1
+        },
+        {
+          "title": "responsive layouts, reduced motion, keyboard and touch emulation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 58087,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T19:20:56.263Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-49c8bc26b7d9cdad18c5",
+          "file": "browser.spec.ts",
+          "line": 38,
+          "column": 1
+        },
+        {
+          "title": "resilience, bounded URLs, offline operation and context restoration",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 187339,
+                  "error": {
+                    "message": "Error: page.evaluate: Execution context was destroyed, most likely because of a navigation",
+                    "stack": "Error: page.evaluate: Execution context was destroyed, most likely because of a navigation\n    at Object.state (/home/wael/music/tests/browser.spec.ts:3:41)\n    at /home/wael/music/tests/browser.spec.ts:61:150",
+                    "location": {
+                      "file": "/home/wael/music/tests/browser.spec.ts",
+                      "column": 41,
+                      "line": 3
+                    },
+                    "snippet": "  1 | import {test,expect,type Page} from '@playwright/test';\n  2 | import {mkdir,writeFile} from 'node:fs/promises';\n> 3 | const api=(page:Page)=>({state:()=>page.evaluate(()=>(window as any).__counterpoint.state())});\n    |                                         ^\n  4 | async function open(page:Page,suffix='?test=1&t=17.3&quality=low'){\n  5 |  await page.goto('./'+suffix);await page.waitForFunction(()=>!!(window as any).__counterpoint||!document.getElementById('fallback')!.hidden);\n  6 |  return await page.evaluate(()=>!!(window as any).__counterpoint);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "/home/wael/music/tests/browser.spec.ts",
+                        "column": 41,
+                        "line": 3
+                      },
+                      "message": "Error: page.evaluate: Execution context was destroyed, most likely because of a navigation\n\n  1 | import {test,expect,type Page} from '@playwright/test';\n  2 | import {mkdir,writeFile} from 'node:fs/promises';\n> 3 | const api=(page:Page)=>({state:()=>page.evaluate(()=>(window as any).__counterpoint.state())});\n    |                                         ^\n  4 | async function open(page:Page,suffix='?test=1&t=17.3&quality=low'){\n  5 |  await page.goto('./'+suffix);await page.waitForFunction(()=>!!(window as any).__counterpoint||!document.getElementById('fallback')!.hidden);\n  6 |  return await page.evaluate(()=>!!(window as any).__counterpoint);\n    at Object.state (/home/wael/music/tests/browser.spec.ts:3:41)\n    at /home/wael/music/tests/browser.spec.ts:61:150"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T19:21:54.414Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "/home/wael/music/test-results/browser-resilience-bounded-3cade-ion-and-context-restoration-chromium/test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "/home/wael/music/test-results/browser-resilience-bounded-3cade-ion-and-context-restoration-chromium/error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "/home/wael/music/tests/browser.spec.ts",
+                    "column": 41,
+                    "line": 3
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-ea4a0c0df2aac8fa0319",
+          "file": "browser.spec.ts",
+          "line": 55,
+          "column": 1
+        },
+        {
+          "title": "audio waveform, scheduling, suspension and no duplicate strikes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 36930,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-21T19:25:35.047Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "fbeac1b2decfba2c3acd-c3afe1d055786800eded",
+          "file": "browser.spec.ts",
+          "line": 66,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-21T19:19:45.096Z",
+    "duration": 417567.782,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

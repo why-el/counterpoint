@@ -1,0 +1,43 @@
+{
+  "mode": "stall",
+  "peak": 0.12935972213745117,
+  "rms": 0.021484122936300802,
+  "duration": 2.8799773242630384,
+  "scheduled": [
+    {
+      "id": "7:0",
+      "time": 21,
+      "generation": 1
+    },
+    {
+      "id": "0:1",
+      "time": 24,
+      "generation": 1
+    },
+    {
+      "id": "1:1",
+      "time": 28.5,
+      "generation": 1
+    },
+    {
+      "id": "2:1",
+      "time": 30,
+      "generation": 1
+    },
+    {
+      "id": "4:1",
+      "time": 37.5,
+      "generation": 1
+    },
+    {
+      "id": "5:1",
+      "time": 39,
+      "generation": 1
+    },
+    {
+      "id": "6:1",
+      "time": 43.5,
+      "generation": 1
+    }
+  ]
+}

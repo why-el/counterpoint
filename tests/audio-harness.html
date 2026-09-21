@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Counterpoint audio regression fixture</title><button id="start">Start audio regression</button><script type="module">
+import {InstrumentAudio} from '/src/audio.ts';
+import {Score,defaultScore,VARIATIONS} from '/src/score.ts';
+window.analyzeArrangements=async()=>{
+ const results=[];
+ for(let variation=0;variation<VARIATIONS.length;variation++){
+  const score=new Score({...defaultScore(),variation});const samples=await new InstrumentAudio().offline(score,51.2);let peak=0,sum=0,maxJump=0;
+  for(let i=0;i<samples.length;i++){const x=samples[i];peak=Math.max(peak,Math.abs(x));sum+=x*x;if(i)maxJump=Math.max(maxJump,Math.abs(x-samples[i-1]));}
+  results.push({name:VARIATIONS[variation],peak,rms:Math.sqrt(sum/samples.length),maxJump});
+ }
+ return results;
+};
+window.runAudioRegression=async(mode='stall')=>{
+ const audio=new InstrumentAudio();const score=new Score();await audio.enable();
+ const destination=audio.context.createMediaStreamDestination();audio.compressor.connect(destination);
+ const recorder=new MediaRecorder(destination.stream);const chunks=[];recorder.ondataavailable=e=>chunks.push(e.data);recorder.start();
+ await new Promise(resolve=>setTimeout(resolve,50));
+ const anchor=audio.context.currentTime;audio.schedule(score,20,true);
+ if(mode==='cancel')audio.disable();
+ // A render/layout stall longer than the old 140 ms horizon spans a real strike.
+ const end=performance.now()+2500;while(performance.now()<end){}
+ audio.schedule(score,20+audio.context.currentTime-anchor,mode!=='cancel');
+ await new Promise(resolve=>setTimeout(resolve,100));
+ await new Promise(resolve=>{recorder.onstop=resolve;recorder.stop();});audio.disable();
+ const raw=await new Blob(chunks,{type:recorder.mimeType}).arrayBuffer();const decoded=await audio.context.decodeAudioData(raw.slice(0));const samples=decoded.getChannelData(0);let peak=0,sum=0;for(const x of samples){peak=Math.max(peak,Math.abs(x));sum+=x*x;}
+ let str='';const bytes=new Uint8Array(raw);for(let i=0;i<bytes.length;i+=32768)str+=String.fromCharCode(...bytes.subarray(i,i+32768));
+ const result={mode,peak,rms:Math.sqrt(sum/samples.length),duration:decoded.duration,scheduled:audio.scheduled,base64:btoa(str)};await audio.context.close();return result;
+};
+</script></html>
