@@ -1,6 +1,6 @@
 # Status — 2026-09-21
 
-Steps 1–3 complete. Step 4's seven review scopes are documented; final capture and release checks remain in progress. Source: https://github.com/why-el/counterpoint, master. Implementation through d809529.
+Steps 1–3 complete. Step 4's seven review scopes are documented; final capture and release checks remain in progress. Source: https://github.com/why-el/counterpoint, master. First deployment 7ef8248 was rejected during visual inspection for a paused-resize blank-canvas defect. The observer now invalidates the renderer; the strengthened viewport/touch regression passes. A new candidate and two consecutive live checks are required.
 
 Verified: 12 core tests; Chromium real controls, responsive/touch/pinch, accessibility behaviors, audio scheduling and waveform, resilience; WebKit 3D controls and audio activation; headed Firefox 3D controls and graceful unavailable-audio handling. Actual final front/three-quarter/rear, impact and loop images are in evidence/final-visual. Known coverage gaps: physical phones, perceptual audio listening, ordinary hardware performance, Firefox audio on this server, multi-hour soak testing.
 

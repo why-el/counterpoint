@@ -5,7 +5,7 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { materials } from './materials';
 import { makeRoute, sampleRoute,railCurve,railProgress,WHEEL,WHEEL_R,BALL_R,TAU } from './routes';
 export type CameraState = [number,number,number];
-export function createSculpture(canvas:HTMLCanvasElement,count=8,alternate=0,initialQuality='auto') {
+export function createSculpture(canvas:HTMLCanvasElement,count=8,alternate=0,initialQuality='auto',invalidate=()=>{}) {
  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance',preserveDrawingBuffer:false});
  const gl=renderer.getContext();const debug=gl.getExtension('WEBGL_debug_renderer_info');const rendererName=debug?String(gl.getParameter(debug.UNMASKED_RENDERER_WEBGL)):'';const software=/SwiftShader|llvmpipe|Software/i.test(rendererName);let quality=initialQuality==='auto'?(software?'low':'high'):initialQuality;renderer.setPixelRatio(quality==='low'?(software?.8:1):Math.min(devicePixelRatio,1.6));renderer.shadowMap.enabled=quality!=='low';renderer.shadowMap.type=THREE.PCFShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;
  const scene=new THREE.Scene();scene.background=new THREE.Color(0x18201e);scene.fog=new THREE.FogExp2(0x18201e,.028);
@@ -85,7 +85,7 @@ export function createSculpture(canvas:HTMLCanvasElement,count=8,alternate=0,ini
  for(const obj of remove)staticRoot.remove(obj);
  for(const [m,gs] of staticGeos){const g=mergeGeometries(gs,false);if(g){const mesh=new THREE.Mesh(g,m);mesh.castShadow=true;mesh.receiveShadow=true;scene.add(mesh);}for(const geo of gs)geo.dispose();}
  let width=1,height=1;
- function resize(){width=canvas.clientWidth;height=canvas.clientHeight;renderer.setSize(width,height,false);camera.aspect=width/height;camera.fov=Math.min(85,2*Math.atan(Math.tan(Math.PI/10)/Math.min(1,camera.aspect))*180/Math.PI);camera.updateProjectionMatrix();}
+ function resize(){width=canvas.clientWidth;height=canvas.clientHeight;renderer.setSize(width,height,false);camera.aspect=width/height;camera.fov=Math.min(85,2*Math.atan(Math.tan(Math.PI/10)/Math.min(1,camera.aspect))*180/Math.PI);camera.updateProjectionMatrix();invalidate();}
  const observer=new ResizeObserver(resize);observer.observe(canvas);resize();
  function update(time:number,enabled:boolean[]=Array(8).fill(true),visible?:(index:number,eventTime:number)=>boolean){
   wheel.rotation.z=-time*TAU/12;

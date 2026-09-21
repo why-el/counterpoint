@@ -37,9 +37,9 @@ test('real controls, deterministic reverse, sound, share, and camera',async({pag
 });
 test('responsive layouts, reduced motion, keyboard and touch emulation',async({page,browser,browserName})=>{
  test.skip(browserName!=='chromium','Viewport and touch matrix is covered once in Chromium; engine interactions run separately.');
- await page.emulateMedia({reducedMotion:'reduce'});expect(await open(page,'?test=1&quality=low')).toBe(true);expect((await api(page).state()).playing).toBe(false);
+ await page.emulateMedia({reducedMotion:'reduce'});expect(await open(page,'?test=1&quality=low')).toBe(true);expect((await api(page).state()).playing).toBe(false);await page.evaluate(()=>(window as any).__counterpoint.setTime(21));
  for(const viewport of [{width:320,height:720},{width:390,height:844},{width:844,height:390},{width:1440,height:1000}]){
-  await page.setViewportSize(viewport);await page.evaluate(()=>(window as any).__counterpoint.setTime(21));expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  await page.setViewportSize(viewport);await expect.poll(async()=>(await page.locator('#scene').screenshot({timeout:120000})).byteLength,{timeout:120000}).toBeGreaterThan(12000);expect((await api(page).state()).time).toBe(21);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   for(const id of ['sound','play','parts','reset','share']){const box=await page.locator('#'+id).boundingBox();expect(box).not.toBeNull();expect(box!.x).toBeGreaterThanOrEqual(0);expect(box!.x+box!.width).toBeLessThanOrEqual(viewport.width+1);expect(box!.y+box!.height).toBeLessThanOrEqual(viewport.height);}
   await page.screenshot({path:`evidence/viewport-${viewport.width}x${viewport.height}.png`,timeout:120000});
  }

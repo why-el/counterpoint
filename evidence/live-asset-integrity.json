@@ -1,0 +1,56 @@
+{
+  "sourceRevision": "7ef8248b6c6611f6d12bcc0531b7c03b0fbe39ad",
+  "allMatch": true,
+  "files": {
+    "THIRD_PARTY.txt": {
+      "status": 200,
+      "bytes": 386,
+      "sha256": "72175ddcb1a445bad42faf1340e7f5e9393c98d55f1055b60249b394658a8798"
+    },
+    "THREE-LICENSE.txt": {
+      "status": 200,
+      "bytes": 1081,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    "assets/index-BPql04Jn.css": {
+      "status": 200,
+      "bytes": 9603,
+      "sha256": "355b341f67520ed4cea1c8a48291df28bbc57902fb73f7959be1b59aeb6fefc7"
+    },
+    "assets/index-C-8hYKEF.js": {
+      "status": 200,
+      "bytes": 614096,
+      "sha256": "611ea53874f21b93dd81c41eb67950d37852a45f2819aceab9c5c335a3337b12"
+    },
+    "assets/index-C-8hYKEF.js.map": {
+      "status": 200,
+      "bytes": 2985690,
+      "sha256": "b20f86fc19390914b711c34fc7c4767b1ec47feea4b4ab3c172a9eaa9445f7de"
+    },
+    "counterpoint.webm": {
+      "status": 200,
+      "bytes": 9661041,
+      "sha256": "cbeb0f627d1a911825079e4362e92df0bbe41538ce7c89296328b6570d29bf43"
+    },
+    "favicon.svg": {
+      "status": 200,
+      "bytes": 312,
+      "sha256": "596d6f216eff58f2b3b7db42533aa5a779e1ad9fccf660d9c9fd9081622ffc20"
+    },
+    "index.html": {
+      "status": 200,
+      "bytes": 5204,
+      "sha256": "086586ad1173a13474aa2faab9d37278a9e6abbe35a30a14fcf1d61bf2e5f12c"
+    },
+    "release.json": {
+      "status": 200,
+      "bytes": 150,
+      "sha256": "982ec0a4443be1c2d6a7466cd5d53017961c4fb187cee2f1212efa4a8f20bd2b"
+    },
+    "still.jpg": {
+      "status": 200,
+      "bytes": 138325,
+      "sha256": "032b2997a36b995827db608e6eaa8c6fefa5f9d466502c3330f41bee5041014f"
+    }
+  }
+}
