@@ -5,9 +5,9 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { materials } from './materials';
 import { makeRoute, sampleRoute,railCurve,railProgress,WHEEL,WHEEL_R,BALL_R,TAU } from './routes';
 export type CameraState = [number,number,number];
-export function createSculpture(canvas:HTMLCanvasElement,count=8,alternate=0) {
- const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance',preserveDrawingBuffer:true});
- renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;
+export function createSculpture(canvas:HTMLCanvasElement,count=8,alternate=0,initialQuality='auto') {
+ const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false,powerPreference:'high-performance',preserveDrawingBuffer:false});
+ const gl=renderer.getContext();const debug=gl.getExtension('WEBGL_debug_renderer_info');const rendererName=debug?String(gl.getParameter(debug.UNMASKED_RENDERER_WEBGL)):'';const software=/SwiftShader|llvmpipe|Software/i.test(rendererName);let quality=initialQuality==='auto'?(software?'low':'high'):initialQuality;renderer.setPixelRatio(quality==='low'?(software?.8:1):Math.min(devicePixelRatio,1.6));renderer.shadowMap.enabled=quality!=='low';renderer.shadowMap.type=THREE.PCFShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.08;
  const scene=new THREE.Scene();scene.background=new THREE.Color(0x18201e);scene.fog=new THREE.FogExp2(0x18201e,.028);
  const mat=materials(renderer);scene.environment=mat.env.texture;scene.environmentIntensity=.55;scene.environmentRotation.y=.5;
  const camera=new THREE.PerspectiveCamera(36,1,.1,70);camera.position.set(8,6.4,10); const controls=new OrbitControls(camera,canvas);controls.target.set(0,2,0);controls.enableDamping=false;controls.minDistance=7.7;controls.maxDistance=17;controls.minPolarAngle=.30;controls.maxPolarAngle=Math.PI*.49;controls.enablePan=false;controls.rotateSpeed=.65;controls.update();
@@ -22,7 +22,7 @@ export function createSculpture(canvas:HTMLCanvasElement,count=8,alternate=0) {
   const mesh=new THREE.Mesh(g,m);mesh.position.copy(Array.isArray(p)?new THREE.Vector3(...p):p);mesh.rotation.set(rot[0],rot[1],rot[2]);mesh.castShadow=true;mesh.receiveShadow=true;root.add(mesh);return mesh;
  }
  function rod(a:THREE.Vector3,b:THREE.Vector3,r=.025,m:THREE.Material=mat.brass,root:THREE.Object3D=staticRoot){const g=new THREE.CylinderGeometry(r,r,a.distanceTo(b),10);const mesh=part(g,m,a.clone().add(b).multiplyScalar(.5),[0,0,0],root);mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),b.clone().sub(a).normalize());return mesh;}
- const floor=part(new THREE.PlaneGeometry(200,200),new THREE.MeshStandardMaterial({color:alternate===2?0xc6c2b5:0x0d1512,roughness:1}),[0,-.1,0],[-Math.PI/2,0,0],scene);floor.castShadow=false;
+ const floor=part(new THREE.PlaneGeometry(200,200),new THREE.MeshLambertMaterial({color:alternate===2?0xc6c2b5:0x17221d}),[0,-.1,0],[-Math.PI/2,0,0],scene);floor.castShadow=false;
  const shadowCanvas=document.createElement('canvas');shadowCanvas.width=shadowCanvas.height=128;const shadowCtx=shadowCanvas.getContext('2d')!;const gradient=shadowCtx.createRadialGradient(64,64,20,64,64,64);gradient.addColorStop(0,'rgba(0,0,0,.7)');gradient.addColorStop(.72,'rgba(0,0,0,.45)');gradient.addColorStop(1,'rgba(0,0,0,0)');shadowCtx.fillStyle=gradient;shadowCtx.fillRect(0,0,128,128);const contact=new THREE.Mesh(new THREE.PlaneGeometry(8.4,8.4),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(shadowCanvas),transparent:true,depthWrite:false}));contact.rotation.x=-Math.PI/2;contact.position.y=-.095;scene.add(contact);
 
  part(new THREE.CylinderGeometry(3.5,3.64,.26,128),mat.stone,[0,.11,0]);
@@ -83,19 +83,19 @@ export function createSculpture(canvas:HTMLCanvasElement,count=8,alternate=0) {
  staticRoot.traverse(o=>{if(o instanceof THREE.Mesh&&!(o instanceof THREE.InstancedMesh)){const g=(o.geometry.index?o.geometry.toNonIndexed():o.geometry.clone()).applyMatrix4(o.matrixWorld);const attr=g.attributes;for(const k of Object.keys(attr))if(!['position','normal','uv'].includes(k))g.deleteAttribute(k);if(!staticGeos.has(o.material as THREE.Material))staticGeos.set(o.material as THREE.Material,[]);staticGeos.get(o.material as THREE.Material)!.push(g);remove.push(o);}});
  for(const obj of remove)staticRoot.remove(obj);
  for(const [m,gs] of staticGeos){const g=mergeGeometries(gs,false);if(g){const mesh=new THREE.Mesh(g,m);mesh.castShadow=true;mesh.receiveShadow=true;scene.add(mesh);}for(const geo of gs)geo.dispose();}
- let width=1,height=1;let quality='high';
+ let width=1,height=1;
  function resize(){width=canvas.clientWidth;height=canvas.clientHeight;renderer.setSize(width,height,false);camera.aspect=width/height;camera.fov=Math.min(85,2*Math.atan(Math.tan(Math.PI/10)/Math.min(1,camera.aspect))*180/Math.PI);camera.updateProjectionMatrix();}
  const observer=new ResizeObserver(resize);observer.observe(canvas);resize();
  function update(time:number,enabled:boolean[]=Array(8).fill(true),visible?:(index:number,eventTime:number)=>boolean){
   wheel.rotation.z=-time*TAU/12;
   for(let i=0;i<routes.length;i++){const s=sampleRoute(routes[i],time);balls[i].position.copy(s.position);balls[i].visible=s.visible&&(visible?visible(i,time-s.age):enabled[i]);let roll=-time*TAU/12;if(s.stage==='rail')roll=-routes[i].travel.getLength()*railProgress((s.age+7.5)/7.2)/BALL_R;else if(s.age>=-.3)roll=-routes[i].travel.getLength()/BALL_R+(s.age>.6?routes[i].returning.getLength()*Math.min(1,(s.age-.6)/3.9)/BALL_R:0);balls[i].rotation.set(0,0,roll);const reacts=visible?visible(i,time-s.age):enabled[i];const parked=!enabled[i]&&!reacts;plates[i].rotation.x=(reacts?s.impact*.075:0)+(parked?.20:0);plates[i].position.y=routes[i].plate.y-(parked?.045:0);const m=targets[i].material as THREE.MeshPhysicalMaterial;m.color.set(enabled[i]?0xeee7d8:0x696f66);tines[i].rotation.z=reacts?s.impact*.14:0;}
  }
- function render(){renderer.render(scene,camera);}
- function reset(){controls.target.set(0,2,0);camera.position.copy(new THREE.Vector3().setFromSpherical(new THREE.Spherical(13.5,.95,.675)).add(controls.target));controls.update();render();}
+ function render(){renderer.render(scene,camera);if(software)gl.finish();}
+ function reset(){controls.target.set(0,2,0);camera.position.copy(new THREE.Vector3().setFromSpherical(new THREE.Spherical(13.5,.95,.675)).add(controls.target));controls.update();}
  function getCamera():CameraState{const s=new THREE.Spherical().setFromVector3(camera.position.clone().sub(controls.target));return [s.theta,s.phi,s.radius];}
- function setCamera(c:CameraState){camera.position.copy(new THREE.Vector3().setFromSpherical(new THREE.Spherical(c[2],c[1],c[0])).add(controls.target));controls.update();render();}
+ function setCamera(c:CameraState){camera.position.copy(new THREE.Vector3().setFromSpherical(new THREE.Spherical(c[2],c[1],c[0])).add(controls.target));controls.update();}
  function project(p:THREE.Vector3){const v=p.clone().project(camera);return {x:(v.x+1)*width/2,y:(1-v.y)*height/2};}
- function setQuality(q:string){quality=q;renderer.setPixelRatio(q==='low'?1:Math.min(devicePixelRatio,1.6));renderer.shadowMap.enabled=q!=='low';resize();}
+ function setQuality(q:string){quality=q;renderer.setPixelRatio(q==='low'?(software?.8:1):Math.min(devicePixelRatio,1.6));renderer.shadowMap.enabled=q!=='low';resize();}
  const raycaster=new THREE.Raycaster();
  function wheelPoint(x:number,y:number){const rect=canvas.getBoundingClientRect();raycaster.setFromCamera(new THREE.Vector2((x-rect.left)/width*2-1,1-(y-rect.top)/height*2),camera);return raycaster.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0,0,1),-WHEEL.z-1.15),new THREE.Vector3());}
  function wheelAngle(x:number,y:number){const p=wheelPoint(x,y);return p?Math.atan2(p.y-WHEEL.y,p.x-WHEEL.x):0;}

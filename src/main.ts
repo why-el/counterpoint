@@ -9,10 +9,10 @@ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const fixed=Number(params.get('t'));const initialTime=params.has('t')&&Number.isFinite(fixed)?Math.max(-48,Math.min(100000,fixed)):17.3;
 const transport=new Transport(()=>performance.now()/1000,initialTime,!reduced.matches&&!params.has('t'));
 const canvas=$<HTMLCanvasElement>('scene');let sculpture:ReturnType<typeof createSculpture>;let dirty=true,scrubbing=false,hidden=false,raf=0,lastUI=0,toastTimer=0,lastFrame=performance.now(),lastDraw=0;
-let quality=params.get('quality')==='low'?'low':'high';let frameTimes:number[]=[];let pendingAt:number|null=null;
+let quality=['low','high'].includes(params.get('quality')||'')?params.get('quality')!:'auto';let frameTimes:number[]=[];let pendingAt:number|null=null;
 function announce(message:string){$('toast').textContent=message;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=window.setTimeout(()=>$('toast').classList.remove('show'),3100);}
 function fallback(message:string){$('fallback-message').textContent=message;$('fallback').hidden=false;}
-try{if(params.get('no-graphics')==='1')throw new Error('WebGL disabled for fallback review');sculpture=createSculpture(canvas,params.get('single')==='1'?1:8,Number(params.get('lighting'))||0);sculpture.setCamera(imported.c);if(quality==='low')sculpture.setQuality('low');}
+try{if(params.get('no-graphics')==='1')throw new Error('WebGL disabled for fallback review');sculpture=createSculpture(canvas,params.get('single')==='1'?1:8,Number(params.get('lighting'))||0,quality);quality=sculpture.stats().quality;sculpture.setCamera(imported.c);}
 catch(error){console.warn('Counterpoint graphics unavailable:',error instanceof Error?error.message:'WebGL unavailable');fallback('This instrument needs WebGL 2 to move. Enable 3D graphics in your browser, then try again.');transport.pause();$('retry').onclick=()=>location.reload();for(const el of document.querySelectorAll<HTMLButtonElement>('.dock button,#variation'))el.disabled=true;$('about-open').onclick=()=>$<HTMLDialogElement>('about').showModal();for(const close of document.querySelectorAll<HTMLButtonElement>('dialog .close'))close.onclick=()=>close.closest('dialog')!.close();return;}
 const s=sculpture!;
 const slider=$<HTMLInputElement>('time');const notes=$('parts-panel').querySelector('.notes')!;
@@ -59,9 +59,9 @@ updateUI();s.update(transport.read(),score.at(transport.read()).mask,(i,e)=>scor
 if(import.meta.env.DEV||params.get('test')==='1'){
  (window as any).__counterpoint={
   state:()=>({time:transport.read(),playing:transport.playing,scrubbing,sound:audio.enabled,audioState:audio.context?.state??'not-created',score:score.desired(),revisions:score.revisions,camera:s.getCamera(),quality,hidden}),
-  setTime:(t:number)=>{pause();seek(t);s.update(t,score.at(t).mask,(i,e)=>score.audible(i,e));s.render();},
+  setTime:(t:number)=>{pause();seek(t);s.update(t,score.at(t).mask,(i,e)=>score.audible(i,e));s.render();dirty=false;},
   setCamera:(c:CameraState)=>{s.setCamera(c);dirty=true;},setQuality:(q:string)=>{quality=q;s.setQuality(q);dirty=true;},
-  capture:()=>{pause();cancelAnimationFrame(raf);s.render();},
+  capture:()=>{pause();s.render();dirty=false;},image:(mime='image/png')=>{s.render();return canvas.toDataURL(mime,.92);},
   stats:()=>({...s.stats(),frameSamples:frameTimes.length,meanFrameMs:frameTimes.length?frameTimes.reduce((a,b)=>a+b,0)/frameTimes.length:0}),
   positions:()=>s.balls.map((b,i)=>({note:i,visible:b.visible,position:b.position.toArray(),stage:sampleRoute(s.routes[i],transport.read()).stage})),
   targets:()=>({notes:s.routes.map(r=>s.project(r.plate)),wheel:s.project(WHEEL.clone().add({x:WHEEL_R*.65,y:WHEEL_R*.65,z:1.16} as any)),wheelCenter:s.project(WHEEL.clone().add({x:0,y:0,z:1.16} as any)),wheelTop:s.project(WHEEL.clone().add({x:0,y:WHEEL_R,z:1.16} as any))}),
