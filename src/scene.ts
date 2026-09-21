@@ -57,6 +57,7 @@ export function createSculpture(canvas:HTMLCanvasElement,count=8,alternate=0,ini
  part(new RoundedBoxGeometry(.56,.46,2.24,3,.12),mat.ceramic,[WHEEL.x,.52,0]);
  for(const z of [-1.14,1.14])part(new RoundedBoxGeometry(.64,.075,.055,2,.02),mat.brass,[WHEEL.x,.49,z]);
  const routes=Array.from({length:count},(_,i)=>makeRoute(i));
+ const ballGeometry=new THREE.SphereGeometry(BALL_R,24,16);const stripeGeometry=new THREE.TorusGeometry(BALL_R+.0005,.002,4,32);const plateGeometry=new RoundedBoxGeometry(.72,.09,.21,4,.035);const pinGeometry=mergeGeometries([new THREE.SphereGeometry(.017,8,6).scale(1,.4,1).translate(-.27,.045,0),new THREE.SphereGeometry(.017,8,6).scale(1,.4,1).translate(.27,.045,0)])!;
  const plates:THREE.Group[]=[];const targets:THREE.Mesh[]=[];const balls:THREE.Mesh[]=[];const tines:THREE.Mesh[]=[];
  for(const r of routes){
   for(const path of [r.travel,r.returning]){
@@ -66,16 +67,16 @@ export function createSculpture(canvas:HTMLCanvasElement,count=8,alternate=0,ini
   // Slender struts explain the suspended rails without filling the negative space.
   if(r.index%2===0){for(const t of [.25,.63]){const p=r.travel.getPointAt(t);p.y-=.13;rod(new THREE.Vector3(p.x,.35,p.z),p,.022,mat.bronze);part(new THREE.CylinderGeometry(.08,.12,.055,16),mat.brass,[p.x,.375,p.z]);}}
   const plateGroup=new THREE.Group();plateGroup.position.copy(r.plate);scene.add(plateGroup);plates.push(plateGroup);
-  const ceramic=mat.ceramic.clone();const plate=part(new RoundedBoxGeometry(.72,.09,.21,4,.035),ceramic,[0,0,0],[0,0,0],plateGroup);plate.userData.note=r.index;targets.push(plate);for(const x of [-.27,.27]){const pin=part(new THREE.SphereGeometry(.017,8,6),mat.bronze,[x,.045,0],[0,0,0],plateGroup);pin.scale.y=.4;}
+  const ceramic=mat.ceramic.clone();const plate=part(plateGeometry,ceramic,[0,0,0],[0,0,0],plateGroup);plate.userData.note=r.index;targets.push(plate);part(pinGeometry,mat.bronze,[0,0,0],[0,0,0],plateGroup);
   for(const dx of [-.15,.15]){
    rod(new THREE.Vector3(r.plate.x+dx,.35,r.plate.z),new THREE.Vector3(r.plate.x+dx,r.plate.y-.10,r.plate.z),.022,mat.brass);
    part(new THREE.SphereGeometry(.044,12,8),mat.bronze,[r.plate.x+dx,r.plate.y-.075,r.plate.z]);
   }
   part(new RoundedBoxGeometry(.34,.065,.18,2,.025),mat.bronze,r.plate.clone().add(new THREE.Vector3(0,-.14,0)));
   const gate=part(new THREE.BoxGeometry(.46,.018,.04),mat.edge,r.plate.clone().add(new THREE.Vector3(-.14,-.09,0)),[0,0,0],scene);tines.push(gate);
-  const ball=part(new THREE.SphereGeometry(BALL_R,24,16),mat.ceramic,[0,0,0],[0,0,0],scene);balls.push(ball);
+  const ball=part(ballGeometry,mat.ceramic,[0,0,0],[0,0,0],scene);balls.push(ball);
   // A fine equator makes rolling direction legible up close.
-  const stripe=new THREE.Mesh(new THREE.TorusGeometry(BALL_R+.0005,.002,4,32),mat.bronze);stripe.rotation.y=Math.PI/2;ball.add(stripe);
+  const stripe=new THREE.Mesh(stripeGeometry,mat.bronze);stripe.rotation.y=Math.PI/2;ball.add(stripe);
  }
  // Merge fixed components by material to keep the intricate assembly inexpensive.
  staticRoot.updateMatrixWorld(true);
